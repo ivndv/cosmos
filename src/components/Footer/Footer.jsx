@@ -150,7 +150,7 @@ const Footer = () => {
 					</Tagline>
 					<SocialRow>
 						<IconLink
-							href="https://github.com/Ivandv19"
+							href="https://github.com/ivndv"
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="GitHub"
