@@ -105,8 +105,6 @@ jobs:
 
       - name: Build
         run: bun run build
-        env:
-          VITE_NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

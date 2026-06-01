@@ -1,58 +1,12 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { useGlobalContext } from "../../context/GlobalContext";
+import { useCosmosStore } from "../../store/cosmosStore";
 import Descripcion from "../Galeria/Descripcion";
 import Titulo from "../Galeria/Titulo";
 import Carousel from "./Carousel";
 import Navbar from "./Navbar";
 
-const Container = styled(motion.div)`
-  text-align: center;
-  padding: 100px 20px 60px;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-
-  @media (max-width: 1024px) {
-    padding: 90px 16px 40px;
-  }
-`;
-
-const ContentWrapper = styled(motion.div)`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
-`;
-
-// Variantes de animación
-const containerVariants = {
-	hidden: { opacity: 0 },
-	visible: {
-		opacity: 1,
-		transition: { staggerChildren: 0.15 },
-	},
-};
-
-const itemVariants = {
-	hidden: { opacity: 0, y: 20 },
-	visible: {
-		opacity: 1,
-		y: 0,
-		transition: { duration: 0.6, ease: "easeOut" },
-	},
-};
-
 const SistemaSolar = () => {
-	const _navigate = useNavigate(); // Inicializa el hook de navegación
-	const { sistemaSolar } = useGlobalContext();
+	const sistemaSolar = useCosmosStore((s) => s.sistemaSolar);
 	const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
 
 	useEffect(() => {
@@ -62,56 +16,37 @@ const SistemaSolar = () => {
 	}, [sistemaSolar]);
 
 	return (
-		<Container initial="hidden" animate="visible" variants={containerVariants}>
+		<div className="text-center pt-[90px] px-4 pb-10 max-w-[1200px] mx-auto flex flex-col justify-center items-center gap-6 lg:pt-[100px] lg:px-5 lg:pb-15">
 			{!categoriaSeleccionada ? (
-				<motion.p variants={itemVariants}>
-					No hay categorías disponibles.
-				</motion.p>
+				<p className="animate-fade-in">No hay categorías disponibles.</p>
 			) : (
 				<>
-					<motion.div
-						variants={itemVariants}
-						style={{ width: "100%", display: "flex", justifyContent: "center" }}
-					>
+					<div className="w-full flex justify-center animate-stagger-1">
 						<Titulo titulo="Sistema solar" />
-					</motion.div>
+					</div>
 
-					<motion.div
-						variants={itemVariants}
-						style={{ width: "100%", display: "flex", justifyContent: "center" }}
-					>
+					<div className="w-full flex justify-center animate-stagger-2">
 						<Descripcion descripcion="Explora el Sistema Solar a través de diversas categorías, donde puedes ver información sobre planetas, lunas y más. Navega fácilmente entre los elementos utilizando la barra de navegación y el carrusel interactivo." />
-					</motion.div>
+					</div>
 
-					<motion.div
-						variants={itemVariants}
-						style={{ width: "100%", display: "flex", justifyContent: "center" }}
-					>
+					<div className="w-full flex justify-center animate-stagger-3">
 						<Navbar
 							categorias={Object.keys(sistemaSolar)}
 							categoriaSeleccionada={categoriaSeleccionada}
 							setCategoriaSeleccionada={setCategoriaSeleccionada}
 						/>
-					</motion.div>
+					</div>
 
-					<AnimatePresence mode="wait">
-						<ContentWrapper
-							key={categoriaSeleccionada}
-							initial={{ opacity: 0, x: 20 }}
-							animate={{ opacity: 1, x: 0 }}
-							exit={{ opacity: 0, x: -20 }}
-							transition={{ duration: 0.4 }}
-						>
-							<Carousel
-								categoriaSeleccionada={categoriaSeleccionada}
-								datos={sistemaSolar[categoriaSeleccionada]}
-							/>
-						</ContentWrapper>
-					</AnimatePresence>
+					<div className="w-full flex flex-col items-center gap-6">
+						<Carousel
+							categoriaSeleccionada={categoriaSeleccionada}
+							datos={sistemaSolar[categoriaSeleccionada]}
+						/>
+					</div>
 				</>
 			)}
-		</Container>
+		</div>
 	);
 };
 
-export default SistemaSolar; // Exporta el componente SistemaSolar
+export default SistemaSolar;

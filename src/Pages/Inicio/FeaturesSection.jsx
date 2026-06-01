@@ -1,51 +1,11 @@
-import { motion } from "framer-motion";
-import styled from "styled-components";
-import { useGlobalContext } from "../../context/GlobalContext";
+import { useCosmosStore } from "../../store/cosmosStore";
 import FeatureCard from "./FeatureCard";
-
-const Section = styled(motion.section)`
-  width: 100%;
-  padding: 80px 20px;
-
-  @media (max-width: 768px) {
-    padding: 40px 10px;
-  }
-`;
-
-const Grid = styled(motion.div)`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const FullWidthCard = styled(motion.div)`
-  grid-column: 1 / -1;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  margin-top: 20px;
-
-  @media (max-width: 768px) {
-    margin-top: 0;
-  }
-`;
-
-const sectionVariants = {
-	hidden: { opacity: 0 },
-	visible: {
-		opacity: 1,
-		transition: { staggerChildren: 0.2 },
-	},
-};
+import useInView from "../../hooks/useInView";
 
 function FeaturesSection() {
-	const { noticias, imagesGaleria, sistemaSolar } = useGlobalContext();
+	const noticias = useCosmosStore((s) => s.noticias);
+	const imagesGaleria = useCosmosStore((s) => s.imagesGaleria);
+	const sistemaSolar = useCosmosStore((s) => s.sistemaSolar);
 	const planetas = sistemaSolar?.planetas || [];
 
 	const features = [
@@ -72,24 +32,25 @@ function FeaturesSection() {
 		},
 	];
 
-	return (
-		<Section
-			id="caracteristicas"
-			variants={sectionVariants}
-			initial="hidden"
-			whileInView="visible"
-			viewport={{ once: true, amount: 0.1 }}
-		>
-			<Grid>
-				{features.slice(0, 2).map((feature) => (
-					<FeatureCard key={feature.titulo} {...feature} />
-				))}
-			</Grid>
+	const [ref, inView] = useInView({ threshold: 0.15 });
 
-			<FullWidthCard>
-				<FeatureCard {...features[2]} />
-			</FullWidthCard>
-		</Section>
+	return (
+		<section
+			id="caracteristicas"
+			ref={ref}
+			className="w-full flex flex-col items-center justify-center px-5 py-16 md:py-28"
+		>
+			<div className={`grid grid-cols-1 gap-5 w-full max-w-[1200px] mx-auto md:grid-cols-2 ${inView ? "animate-stagger-1" : "opacity-0"}`}>
+				{features.slice(0, 2).map((feature, idx) => (
+					<div key={feature.titulo} className={`${inView ? "animate-fade-in-up" : ""}`} style={{ animationDelay: `${idx * 0.1}s` }}>
+						<FeatureCard {...feature} />
+					</div>
+				))}
+				<div className={`col-span-full w-full mt-0 md:mt-5 ${inView ? "animate-fade-in-up" : ""}`} style={{ animationDelay: "0.2s" }}>
+					<FeatureCard {...features[2]} />
+				</div>
+			</div>
+		</section>
 	);
 }
 

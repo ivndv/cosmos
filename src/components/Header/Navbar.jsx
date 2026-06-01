@@ -1,28 +1,5 @@
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-
-const NavbarStyled = styled.nav`
-  display: flex;
-  gap: 16px;
-  z-index: 1;
-`;
-
-const NavLink = styled(Link)`
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  opacity: 0.85;
-  transition: opacity 0.2s, color 0.2s;
-
-  &:hover {
-    color: #7c6af7;
-    opacity: 1;
-  }
-`;
 
 const links = [
 	{ to: "/", icon: "lucide:home", label: "Inicio" },
@@ -33,14 +10,19 @@ const links = [
 
 function Navbar() {
 	return (
-		<NavbarStyled>
+		<nav className="flex gap-4 z-1">
 			{links.map(({ to, icon, label }) => (
-				<NavLink key={to} to={to} aria-label={label}>
+				<Link
+					key={to}
+					to={to}
+					aria-label={label}
+					className="no-underline text-text-primary text-sm flex items-center gap-1.5 opacity-85 transition-colors duration-200 hover:text-accent hover:opacity-100"
+				>
 					<Icon icon={icon} width="16" />
 					{label}
-				</NavLink>
+				</Link>
 			))}
-		</NavbarStyled>
+		</nav>
 	);
 }
 

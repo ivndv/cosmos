@@ -1,84 +1,29 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import Button from "../Button/Button";
-
-const Section = styled(motion.section)`
-  width: 100%;
-  padding: 100px 20px;
-  background: #0d0d1a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  text-align: center;
-`;
-
-const Title = styled(motion.h2)`
-  font-size: 2.5rem;
-  color: #ffffff;
-
-  @media (max-width: 768px) {
-    font-size: 7vw;
-  }
-`;
-
-const Subtitle = styled(motion.p)`
-  font-size: 1.1rem;
-  color: #a0a0b8;
-  max-width: 600px;
-  line-height: 1.6;
-
-  @media (max-width: 768px) {
-    font-size: 4vw;
-    padding: 0 10px;
-  }
-`;
-
-const containerVariants = {
-	hidden: { opacity: 0 },
-	visible: {
-		opacity: 1,
-		transition: { staggerChildren: 0.2, delayChildren: 0.2 },
-	},
-};
-
-const itemVariants = {
-	hidden: { opacity: 0, y: 30 },
-	visible: {
-		opacity: 1,
-		y: 0,
-		transition: { duration: 0.6, ease: "easeOut" },
-	},
-};
+import useInView from "../../hooks/useInView";
 
 function CTABanner() {
+	const [ref, inView] = useInView({ threshold: 0.15 });
+
 	return (
-		<Section
-			initial="hidden"
-			whileInView="visible"
-			viewport={{ once: true, amount: 0.3 }}
-			variants={containerVariants}
+		<section
+			ref={ref}
+			className={`w-full min-h-[350px] py-10 px-5 bg-bg-primary flex flex-col items-center justify-center gap-8 text-center md:min-h-[400px] md:py-16 ${inView ? "animate-stagger-1" : "opacity-0"}`}
 		>
-			<Title variants={itemVariants}>¿Listo para Explorar el Cosmos?</Title>
-			<Subtitle variants={itemVariants}>
+			<h2 className="text-[7vw] md:text-[2.5rem] text-text-primary">
+				¿Listo para Explorar el Cosmos?
+			</h2>
+			<p className="text-[4vw] px-2.5 text-text-secondary max-w-[600px] leading-[1.6] md:text-[1.1rem] md:px-0">
 				Únete a nosotros en este viaje interestelar. Descubre imágenes
 				impresionantes, noticias actualizadas y datos fascinantes del sistema
 				solar.
-			</Subtitle>
-			<Link to="/galer%C3%ADa-espacial" style={{ textDecoration: "none" }}>
-				<Button
-					$variant="filled"
-					$size="lg"
-					variants={itemVariants}
-					whileHover={{ scale: 1.05 }}
-					whileTap={{ scale: 0.95 }}
-				>
+			</p>
+			<Link to="/galería-espacial" className="no-underline">
+				<Button className="w-[140px] h-[30px] text-sm bg-bg-secondary text-text-primary border border-bg-secondary hover:bg-bg-hover">
 					Explorar Galería
 				</Button>
 			</Link>
-		</Section>
+		</section>
 	);
 }
 

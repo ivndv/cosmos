@@ -12,7 +12,7 @@ const useCarrusel = (images) => {
 		}, 5000); // Cambia cada 5 segundos
 
 		return () => clearInterval(interval); // Limpia el intervalo al desmontar el componente
-	}, [images.length]); // Dependencia que hace que el efecto se ejecute cuando cambia la longitud de 'images'
+	}, [images]);
 
 	return { currentIndex, setCurrentIndex }; // Retorna el índice actual y la función para actualizarlo
 };

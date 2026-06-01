@@ -1,28 +1,36 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import App from "./App.jsx";
-import Galería from "./Pages/Galeria/Galería.jsx";
-import Inicio from "./Pages/Inicio/Inicio.jsx";
-import Noticia from "./Pages/Noticias/Noticia.jsx";
-import Noticias from "./Pages/Noticias/Noticias.jsx";
-import SistemaSolar from "./Pages/SistemaSolar/SistemaSolar.jsx";
+
+const Inicio = lazy(() => import("./Pages/Inicio/Inicio.jsx"));
+const Galería = lazy(() => import("./Pages/Galeria/Galería.jsx"));
+const Noticias = lazy(() => import("./Pages/Noticias/Noticias.jsx"));
+const Noticia = lazy(() => import("./Pages/Noticias/Noticia.jsx"));
+const SistemaSolar = lazy(() => import("./Pages/SistemaSolar/SistemaSolar.jsx"));
+const NotFound = lazy(() => import("./Pages/NotFound/NotFound.jsx"));
+
+function SpinnerFallback() {
+	return (
+		<div className="min-h-screen flex items-center justify-center bg-bg-primary">
+			<div className="border-[8px] border-[#f3f3f3] border-t-[8px] border-t-[#3498db] rounded-full w-[50px] h-[50px] animate-spin" />
+		</div>
+	);
+}
 
 function AppRoutes() {
 	return (
-		<Routes>
-			{/* Ruta principal del sitio */}
-			<Route path="/" element={<App />}>
-				{/* Ruta de inicio */}
-				<Route index element={<Inicio />} />
-				{/* Ruta de la galería espacial */}
-				<Route path="/galería-espacial" element={<Galería />} />
-				{/* Ruta de noticias */}
-				<Route path="/noticias" element={<Noticias />} />
-				{/* Ruta de una noticia específica */}
-				<Route path="/noticias/:slug" element={<Noticia />} />
-				{/* Ruta del sistema solar */}
-				<Route path="/sistema-solar" element={<SistemaSolar />} />
-			</Route>
-		</Routes>
+		<Suspense fallback={<SpinnerFallback />}>
+			<Routes>
+				<Route path="/" element={<App />}>
+					<Route index element={<Inicio />} />
+					<Route path="/galería-espacial" element={<Galería />} />
+					<Route path="/noticias" element={<Noticias />} />
+					<Route path="/noticias/:slug" element={<Noticia />} />
+					<Route path="/sistema-solar" element={<SistemaSolar />} />
+					<Route path="*" element={<NotFound />} />
+				</Route>
+			</Routes>
+		</Suspense>
 	);
 }
 

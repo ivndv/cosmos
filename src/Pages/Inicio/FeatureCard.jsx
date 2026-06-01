@@ -1,115 +1,29 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import Button from "../../components/Button/Button";
-
-const Card = styled(motion.div)`
-  position: relative;
-  width: 100%;
-  height: 300px;
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-
-  @media (max-width: 768px) {
-    height: auto;
-    min-height: 220px;
-  }
-`;
-
-const BackgroundImage = styled.div`
-  position: absolute;
-  inset: 0;
-  background-image: url(${(props) => props.$image});
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.4s ease;
-
-  ${Card}:hover & {
-    transform: scale(1.05);
-  }
-`;
-
-const Overlay = styled.div`
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0.3) 50%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
-  transition: background 0.3s ease;
-
-  ${Card}:hover & {
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.9) 0%,
-      rgba(0, 0, 0, 0.5) 50%,
-      rgba(0, 0, 0, 0.2) 100%
-    );
-  }
-`;
-
-const Content = styled.div`
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  height: 100%;
-  padding: 24px;
-  color: white;
-`;
-
-const Title = styled.h3`
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-
-  @media (max-width: 768px) {
-    font-size: 1.3rem;
-  }
-`;
-
-const Description = styled.p`
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 0;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  opacity: 0.9;
-
-  @media (max-width: 768px) {
-    font-size: 0.85rem;
-  }
-`;
-
-const ButtonWrapper = styled.div`
-  margin-top: 16px;
-  align-self: flex-start;
-`;
 
 function FeatureCard({ titulo, descripcion, image, to }) {
 	return (
-		<Card
-			initial={{ opacity: 0, y: 30 }}
-			whileInView={{ opacity: 1, y: 0 }}
-			viewport={{ once: true, amount: 0.3 }}
-			transition={{ duration: 0.6, ease: "easeOut" }}
-		>
-			<BackgroundImage $image={image} />
-			<Overlay />
-			<Content>
-				<Title>{titulo}</Title>
-				<Description>{descripcion}</Description>
-				<ButtonWrapper>
-					<Button as={Link} to={to} $size="sm">
-						Mostrar más
-					</Button>
-				</ButtonWrapper>
-			</Content>
-		</Card>
+		<div className="relative w-full h-[300px] md:h-auto md:min-h-[220px] rounded-md overflow-hidden cursor-pointer group">
+			<div
+				className="absolute inset-0 bg-cover bg-center transition-transform duration-[400ms] group-hover:scale-105"
+				style={{ backgroundImage: `url(${image})` }}
+			/>
+			<div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 transition-all duration-300 group-hover:from-black/90 group-hover:via-black/50 group-hover:to-black/20" />
+			<div className="relative z-1 flex flex-col justify-end h-full p-6 text-white">
+				<h3 className="text-[1.6rem] md:text-[1.3rem] font-bold mb-2 [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
+					{titulo}
+				</h3>
+				<p className="text-sm leading-[1.5] [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] opacity-90 mb-0 md:text-sm">
+					{descripcion}
+				</p>
+				<Link
+					to={to}
+					className="mt-4 self-start inline-flex items-center justify-center px-4 py-2 text-sm font-semibold bg-transparent text-accent border border-accent rounded-md no-underline cursor-pointer transition-all duration-300 hover:bg-accent hover:text-text-primary"
+				>
+					Mostrar más
+				</Link>
+			</div>
+		</div>
 	);
 }
 

@@ -1,56 +1,62 @@
 {
-	"name": "cosmos",
-	"private": true,
-	"version": "0.0.0",
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"lint": "biome lint .",
-		"format": "biome format --write .",
-		"check": "biome check --write .",
-		"preview": "vite preview",
-		"test": "vitest run",
-		"test:watch": "vitest"
-	},
-	"dependencies": {
-		"@fontsource/outfit": "^5.2.8",
-		"framer-motion": "^12.40.0",
-		"react": "^19.2.6",
-		"react-dom": "^19.2.6",
-		"react-icons": "^5.6.0",
-		"react-router-dom": "^7.16.0",
-		"styled-components": "^6.4.2"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^2.4.16",
-		"@iconify/react": "^6.0.2",
-		"@testing-library/jest-dom": "^6.9.1",
-		"@testing-library/react": "^16.3.2",
-		"@types/react": "^19.2.15",
-		"@types/react-dom": "^19.2.3",
-		"@vitejs/plugin-react": "latest",
-		"jsdom": "^29.1.1",
-		"vite": "^8.0.16",
-		"vitest": "^4.1.8"
-	},
-	"description": "Space App V3 es una aplicación interactiva para gestionar y visualizar contenido diverso sobre el espacio, incluyendo una galería de imágenes, noticias y un apartado del sistema solar.",
-	"keywords": [
-		"react",
-		"vite",
-		"nasa-api",
-		"framer-motion",
-		"styled-components",
-		"space-exploration"
-	],
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/ivndv/cosmos.git"
-	},
-	"author": "Ivan Cruz",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/ivndv/cosmos/issues"
-	},
-	"homepage": "https://cosmos.mgdc.site/"
+  "name": "cosmos",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:full": "bun run build && bunx wrangler pages dev dist/ --ip localhost --port 4321",
+    "build": "vite build",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check --write .",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@fontsource/outfit": "^5.2.8",
+    "@tailwindcss/vite": "^4.3.0",
+    "hono": "^4.12.23",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-icons": "^5.6.0",
+    "react-router-dom": "^7.16.0",
+    "tailwindcss": "^4.3.0",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.16",
+    "@iconify/react": "^6.0.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "latest",
+    "jsdom": "^29.1.1",
+    "vite": "^8.0.16",
+    "vitest": "^4.1.8",
+    "wrangler": "^4.96.0"
+  },
+  "description": "Cosmos — Explora el universo con imágenes astronómicas, noticias espaciales y datos del sistema solar.",
+  "keywords": [
+    "react",
+    "vite",
+    "tailwindcss",
+    "nasa-api",
+    "react-router",
+    "zustand",
+    "space-exploration",
+    "cosmos"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivndv/cosmos.git"
+  },
+  "author": "Ivan Cruz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivndv/cosmos/issues"
+  },
+  "homepage": "https://cosmos.mgdc.site/"
 }

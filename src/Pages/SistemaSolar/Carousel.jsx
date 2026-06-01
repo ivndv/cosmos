@@ -1,147 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 
-/* ─── Contenedor Principal ──────────────────────────────── */
-const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-`;
-
-const CategoryTitle = styled.h2`
-  font-size: 1.8rem;
-  color: #1a1a2e;
-  margin: 0;
-  text-transform: capitalize;
-`;
-
-/* ─── Layout del Carrusel ───────────────────────────────── */
-const CarouselWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    gap: 8px;
-  }
-`;
-
-const CarouselContent = styled.div`
-  flex: 1;
-  background-color: #fff;
-  border: 1px solid #e8e8e8;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-`;
-
-const ImageContainer = styled.div`
-  width: 100%;
-  height: 400px;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media (max-width: 768px) {
-    height: 260px;
-  }
-`;
-
-const CarouselImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  animation: fadeIn 0.4s ease;
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-`;
-
-const TextContent = styled.div`
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  text-align: left;
-`;
-
-const ItemTitle = styled.h3`
-  font-size: 1.4rem;
-  color: #1a1a2e;
-  margin: 0;
-`;
-
-const ItemExplanation = styled.p`
-  font-size: 0.95rem;
-  color: #555;
-  line-height: 1.6;
-  margin: 0;
-`;
-
-/* ─── Controles ─────────────────────────────────────────── */
-const NavButton = styled.button`
-  background: #1a1a2e;
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: white;
-  font-size: 1.2rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-
-  &:hover {
-    background: #2d2d5e;
-    transform: scale(1.1);
-  }
-
-  @media (max-width: 768px) {
-    width: 36px;
-    height: 36px;
-    font-size: 1rem;
-  }
-`;
-
-const DotsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 10px;
-  flex-wrap: wrap;
-`;
-
-const Dot = styled.button`
-  height: 10px;
-  width: 10px;
-  border: none;
-  border-radius: 50%;
-  background-color: ${({ $active }) => ($active ? "#1a1a2e" : "#d0d0d0")};
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
-  padding: 0;
-
-  &:hover {
-    background-color: ${({ $active }) => ($active ? "#1a1a2e" : "#a0a0a0")};
-    transform: scale(1.2);
-  }
-`;
-
-/* ─── Componente ────────────────────────────────────────── */
 const Carousel = ({ categoriaSeleccionada, datos }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -166,52 +24,74 @@ const Carousel = ({ categoriaSeleccionada, datos }) => {
 	const currentItem = datos[currentIndex];
 
 	return (
-		<MainContainer>
-			<CategoryTitle>{categoriaSeleccionada}</CategoryTitle>
+		<div className="flex flex-col items-center gap-5 w-full max-w-[900px] mx-auto">
+			<h2 className="text-[1.8rem] text-bg-secondary m-0 capitalize">
+				{categoriaSeleccionada}
+			</h2>
 
-			<CarouselWrapper>
-				<NavButton onClick={handlePrev} aria-label="Anterior">
+			<div className="flex items-center gap-2 w-full md:gap-4">
+				<button
+					type="button"
+					onClick={handlePrev}
+					aria-label="Anterior"
+					className="bg-bg-secondary border-none rounded-full w-9 h-9 flex items-center justify-center cursor-pointer text-text-primary text-base shadow-btn transition-all duration-200 shrink-0 hover:bg-bg-hover hover:scale-110 md:w-11 md:h-11 md:text-[1.2rem]"
+				>
 					◀
-				</NavButton>
+				</button>
 
-				<CarouselContent>
+				<div className="flex-1 bg-bg-surface border border-[#e8e8e8] rounded-lg overflow-hidden shadow-glass flex flex-col">
 					{currentItem ? (
 						<>
-							<ImageContainer>
-								<CarouselImage
-									key={currentItem.title} // Fuerzo re-render para la animación fadeIn
+							<div className="w-full h-[260px] bg-black flex items-center justify-center md:h-[400px]">
+								<img
+									key={currentItem.title}
 									src={currentItem.url}
 									alt={currentItem.title}
+									className="w-full h-full object-contain animate-fade-in-slow"
 								/>
-							</ImageContainer>
-							<TextContent>
-								<ItemTitle>{currentItem.title}</ItemTitle>
-								<ItemExplanation>{currentItem.explanation}</ItemExplanation>
-							</TextContent>
+							</div>
+							<div className="p-6 flex flex-col gap-3 text-left">
+								<h3 className="text-[1.4rem] text-bg-secondary m-0">
+									{currentItem.title}
+								</h3>
+								<p className="text-sm text-text-on-surface leading-[1.6] m-0">
+									{currentItem.explanation}
+								</p>
+							</div>
 						</>
 					) : (
-						<TextContent>
+						<div className="p-6 flex flex-col gap-3 text-left">
 							<p>No hay datos disponibles.</p>
-						</TextContent>
+						</div>
 					)}
-				</CarouselContent>
+				</div>
 
-				<NavButton onClick={handleNext} aria-label="Siguiente">
+				<button
+					type="button"
+					onClick={handleNext}
+					aria-label="Siguiente"
+					className="bg-bg-secondary border-none rounded-full w-9 h-9 flex items-center justify-center cursor-pointer text-text-primary text-base shadow-btn transition-all duration-200 shrink-0 hover:bg-bg-hover hover:scale-110 md:w-11 md:h-11 md:text-[1.2rem]"
+				>
 					▶
-				</NavButton>
-			</CarouselWrapper>
+				</button>
+			</div>
 
-			<DotsContainer>
+			<div className="flex justify-center gap-2 mt-2.5 flex-wrap">
 				{datos.map((item, index) => (
-					<Dot
+					<button
 						key={item.titulo || index}
-						$active={index === currentIndex}
+						type="button"
+						className={`h-2.5 w-2.5 border-none rounded-full cursor-pointer p-0 transition-[background,transform] duration-300 ${
+							index === currentIndex
+								? "bg-bg-secondary"
+								: "bg-[#d0d0d0] hover:bg-[#a0a0a0]"
+						} hover:scale-120`}
 						onClick={() => setCurrentIndex(index)}
 						aria-label={`Ir a imagen ${index + 1}`}
 					/>
 				))}
-			</DotsContainer>
-		</MainContainer>
+			</div>
+		</div>
 	);
 };
 

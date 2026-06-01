@@ -1,16 +1,16 @@
 import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
-import GlobalStyleds from "./components/Globalstyleds/Globalstyleds";
 import Header from "./components/Header/Header";
 
 function App() {
 	return (
-		<>
-			<GlobalStyleds />
+		<div className="flex flex-col min-h-screen">
 			<Header />
-			<Outlet />
+			<main className="flex-1">
+				<Outlet />
+			</main>
 			<Footer />
-		</>
+		</div>
 	);
 }
 

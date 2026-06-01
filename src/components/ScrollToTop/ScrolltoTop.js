@@ -1,16 +1,15 @@
-// ScrollToTop.js
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const ScrollToTop = () => {
-	useLocation();
+	const { pathname } = useLocation();
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: need pathname to re-run on route changes
 	useEffect(() => {
-		// Al cambiar de ruta, desplaza automáticamente la ventana hacia arriba
 		window.scrollTo(0, 0);
-	}, []); // Efecto dependiente del cambio en la ruta
+	}, [pathname]);
 
-	return null; // No renderiza ningún elemento en el DOM
+	return null;
 };
 
 export default ScrollToTop;

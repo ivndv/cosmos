@@ -1,125 +1,40 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import Button from "../../components/Button/Button";
-import { useGlobalContext } from "../../context/GlobalContext";
+import { useCosmosStore } from "../../store/cosmosStore";
 
-/* ─── Layout ────────────────────────────────────────────── */
-const PageWrapper = styled.div`
-  padding: 100px 20px 60px;
-  max-width: 820px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-`;
-
-/* ─── Hero image ────────────────────────────────────────── */
-const HeroImage = styled.img`
-  width: 100%;
-  max-height: 420px;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
-`;
-
-/* ─── Meta ──────────────────────────────────────────────── */
-const Meta = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 0.82rem;
-  color: #888;
-  flex-wrap: wrap;
-`;
-
-const Category = styled.span`
-  background: #1a1a2e;
-  color: #fff;
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-`;
-
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 800;
-  color: #1a1a2e;
-  line-height: 1.3;
-  margin: 0;
-
-  @media (max-width: 640px) {
-    font-size: 1.4rem;
-  }
-`;
-
-/* ─── Resumen ───────────────────────────────────────────── */
-const Explanation = styled.p`
-  font-size: 1.1rem;
-  color: #555;
-  line-height: 1.7;
-  border-left: 4px solid #1a1a2e;
-  padding-left: 16px;
-  margin: 0;
-`;
-
-/* ─── Cuerpo ────────────────────────────────────────────── */
-const Content = styled.p`
-  font-size: 1rem;
-  color: #333;
-  line-height: 1.8;
-  margin: 0;
-`;
-
-/* ─── Tags ──────────────────────────────────────────────── */
-const TagsRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-`;
-
-const Tag = styled.span`
-  background: #f0f0f5;
-  color: #555;
-  border-radius: 12px;
-  padding: 4px 12px;
-  font-size: 0.78rem;
-`;
-
-/* ─── Divider ───────────────────────────────────────────── */
-const Divider = styled.hr`
-  border: none;
-  border-top: 1px solid #eee;
-  margin: 0;
-`;
-
-/* ─── Componente ────────────────────────────────────────── */
 const Noticia = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { id } = location.state || {};
-	const { noticias } = useGlobalContext();
+	const noticias = useCosmosStore((s) => s.noticias);
 	const noticia = noticias.find((n) => n.id === id);
 
 	if (!noticia) {
 		return (
-			<PageWrapper>
+			<div className="px-5 pt-[100px] pb-16 max-w-[820px] mx-auto flex flex-col gap-7">
 				<p>Noticia no encontrada.</p>
-				<Button $variant="filled" onClick={() => navigate("/noticias")}>
+				<Button
+					className="px-6 py-3 text-base bg-bg-secondary text-text-primary border border-bg-secondary hover:bg-bg-hover"
+					onClick={() => navigate("/noticias")}
+				>
 					← Volver a Noticias
 				</Button>
-			</PageWrapper>
+			</div>
 		);
 	}
 
 	return (
-		<PageWrapper>
-			{/* Imagen principal */}
-			<HeroImage src={noticia.url} alt={noticia.title} />
+		<div className="px-5 pt-[100px] pb-16 max-w-[820px] mx-auto flex flex-col gap-7">
+			<img
+				src={noticia.url}
+				alt={noticia.title}
+				className="w-full max-h-[420px] object-cover rounded-lg shadow-img"
+			/>
 
-			{/* Meta: categoría + autor + fecha */}
-			<Meta>
-				<Category>{noticia.categoria}</Category>
+			<div className="flex items-center gap-4 text-sm text-[#888] flex-wrap">
+				<span className="bg-bg-secondary text-text-primary px-2.5 py-1 rounded-md text-xs font-semibold">
+					{noticia.categoria}
+				</span>
 				<span>Por {noticia.author}</span>
 				<span>
 					{new Date(noticia.date).toLocaleDateString("es-MX", {
@@ -129,33 +44,42 @@ const Noticia = () => {
 					})}
 				</span>
 				<span>👁 {noticia.views.toLocaleString()} vistas</span>
-			</Meta>
+			</div>
 
-			{/* Título */}
-			<Title>{noticia.title}</Title>
+			<h1 className="text-2xl md:text-[1.4rem] font-extrabold text-bg-secondary leading-[1.3] m-0">
+				{noticia.title}
+			</h1>
 
-			{/* Resumen destacado */}
-			<Explanation>{noticia.explanation}</Explanation>
+			<p className="text-[1.1rem] text-text-on-surface leading-[1.7] border-l-4 border-l-bg-secondary pl-4 m-0">
+				{noticia.explanation}
+			</p>
 
-			<Divider />
+			<hr className="border-none border-t border-[#eee] m-0" />
 
-			{/* Contenido completo */}
-			<Content>{noticia.content}</Content>
+			<p className="text-base text-[#333] leading-[1.8] m-0">
+				{noticia.content}
+			</p>
 
-			{/* Tags / Keywords */}
-			<TagsRow>
+			<div className="flex flex-wrap gap-2">
 				{noticia.keywords.map((kw) => (
-					<Tag key={kw}>#{kw}</Tag>
+					<span
+						key={kw}
+						className="bg-bg-surface-alt text-text-on-surface rounded-md px-3 py-1 text-sm"
+					>
+						#{kw}
+					</span>
 				))}
-			</TagsRow>
+			</div>
 
-			<Divider />
+			<hr className="border-none border-t border-[#eee] m-0" />
 
-			{/* Regresar */}
-			<Button $variant="filled" onClick={() => navigate("/noticias")}>
+			<Button
+				className="px-6 py-3 text-base bg-bg-secondary text-text-primary border border-bg-secondary hover:bg-bg-hover"
+				onClick={() => navigate("/noticias")}
+			>
 				← Volver a Noticias
 			</Button>
-		</PageWrapper>
+		</div>
 	);
 };
 

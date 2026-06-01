@@ -1,72 +1,31 @@
-import styled from "styled-components";
-
-const Nav = styled.nav`
-  width: 100%;
-  margin-bottom: 20px;
-  overflow-x: auto;
-  
-  /* scrollbar sutil */
-  &::-webkit-scrollbar { height: 6px; }
-  &::-webkit-scrollbar-track { background: transparent; }
-  &::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 8px; }
-`;
-
-const NavList = styled.ul`
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  padding: 0 10px;
-  margin: 0;
-
-  @media (max-width: 768px) {
-    justify-content: flex-start;
-  }
-`;
-
-const NavItem = styled.button`
-  background: ${({ $isSelected }) => ($isSelected ? "#1a1a2e" : "#f0f0f5")};
-  color: ${({ $isSelected }) => ($isSelected ? "white" : "#555")};
-  border: none;
-  border-radius: 24px;
-  padding: 10px 24px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-transform: capitalize;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: ${({ $isSelected }) => ($isSelected ? "#1a1a2e" : "#e0e0e8")};
-    transform: translateY(-2px);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-    padding: 8px 18px;
-  }
-`;
-
 const Navbar = ({
 	categorias,
 	setCategoriaSeleccionada,
 	categoriaSeleccionada,
 }) => {
 	return (
-		<Nav>
-			<NavList>
-				{categorias.map((categoria) => (
-					<NavItem
-						key={categoria}
-						onClick={() => setCategoriaSeleccionada(categoria)}
-						$isSelected={categoria === categoriaSeleccionada}
-					>
-						{categoria}
-					</NavItem>
-				))}
-			</NavList>
-		</Nav>
+		<nav className="w-full mb-5 overflow-x-auto [&::-webkit-scrollbar]:h-[6px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#d0d0d0] [&::-webkit-scrollbar-thumb]:rounded-sm">
+			<ul className="list-none flex justify-start gap-3 px-2.5 m-0 md:justify-center">
+				{categorias.map((categoria) => {
+					const isSelected = categoria === categoriaSeleccionada;
+					return (
+						<li key={categoria}>
+							<button
+								type="button"
+								onClick={() => setCategoriaSeleccionada(categoria)}
+								className={`border-none rounded-xl px-4 py-2 text-sm font-semibold capitalize cursor-pointer whitespace-nowrap transition-all duration-200 md:px-6 md:py-2.5 md:text-base ${
+									isSelected
+										? "bg-bg-secondary text-text-primary"
+										: "bg-bg-surface-alt text-text-on-surface hover:bg-[#e0e0e8]"
+								} hover:-translate-y-0.5`}
+							>
+								{categoria}
+							</button>
+						</li>
+					);
+				})}
+			</ul>
+		</nav>
 	);
 };
 

@@ -27,3 +27,5 @@ dist-ssr
 
 /docs/
 .codegraph
+.wrangler
+.dev.vars
