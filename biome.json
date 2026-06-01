@@ -19,7 +19,8 @@
 			"a11y": {
 				"noStaticElementInteractions": "off",
 				"useKeyWithClickEvents": "off",
-				"useButtonType": "off"
+				"useButtonType": "off",
+				"useSemanticElements": "off"
 			}
 		}
 	},

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Button from "../../components/Button/Button";
 
 function FeatureCard({ titulo, descripcion, image, to }) {
 	return (
