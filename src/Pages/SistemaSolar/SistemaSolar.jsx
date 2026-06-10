@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { useCosmosStore } from "../../store/cosmosStore";
+import { sistemaSolar } from "../../data/sistemaSolar";
 import Descripcion from "../Galeria/Descripcion";
 import Titulo from "../Galeria/Titulo";
-import Carousel from "./Carousel";
+import Carrusel from "./Carrusel";
 import Navbar from "./Navbar";
 
 const SistemaSolar = () => {
-	const sistemaSolar = useCosmosStore((s) => s.sistemaSolar);
 	const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
 
 	useEffect(() => {
 		if (sistemaSolar && Object.keys(sistemaSolar).length > 0) {
 			setCategoriaSeleccionada(Object.keys(sistemaSolar)[0]);
 		}
-	}, [sistemaSolar]);
+	}, []);
 
 	return (
 		<div className="text-center pt-[90px] px-4 pb-10 max-w-[1200px] mx-auto flex flex-col justify-center items-center gap-6 lg:pt-[100px] lg:px-5 lg:pb-15">
@@ -38,7 +37,7 @@ const SistemaSolar = () => {
 					</div>
 
 					<div className="w-full flex flex-col items-center gap-6">
-						<Carousel
+						<Carrusel
 							categoriaSeleccionada={categoriaSeleccionada}
 							datos={sistemaSolar[categoriaSeleccionada]}
 						/>

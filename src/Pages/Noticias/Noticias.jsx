@@ -1,8 +1,8 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Button from "../../components/Button/Button";
-import { useCosmosStore } from "../../store/cosmosStore";
+import Boton from "../../components/Boton/Boton";
+import { noticias } from "../../data/noticias";
 import Titulo from "../Galeria/Titulo";
 
 const generarSlug = (title) =>
@@ -12,7 +12,6 @@ const generarSlug = (title) =>
 		.replace(/\s+/g, "-");
 
 const Noticias = () => {
-	const noticias = useCosmosStore((s) => s.noticias);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedCategory, setSelectedCategory] = useState("");
 	const [selectedAuthor, setSelectedAuthor] = useState("");
@@ -264,9 +263,9 @@ const Noticias = () => {
 									state={{ id: noticia.id }}
 									className="block mt-3"
 								>
-									<Button className="px-4 py-2 text-sm bg-bg-secondary text-text-primary border border-bg-secondary hover:bg-bg-hover">
+									<Boton className="px-4 py-2 text-sm bg-bg-secondary text-text-primary border border-bg-secondary hover:bg-bg-hover">
 										Ver más
-									</Button>
+									</Boton>
 								</Link>
 							</div>
 						</div>

@@ -1,24 +1,23 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import Button from "../../components/Button/Button";
-import { useCosmosStore } from "../../store/cosmosStore";
+import Boton from "../../components/Boton/Boton";
+import { noticias } from "../../data/noticias";
 
 const Noticia = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { id } = location.state || {};
-	const noticias = useCosmosStore((s) => s.noticias);
 	const noticia = noticias.find((n) => n.id === id);
 
 	if (!noticia) {
 		return (
 			<div className="px-5 pt-[100px] pb-16 max-w-[820px] mx-auto flex flex-col gap-7">
 				<p>Noticia no encontrada.</p>
-				<Button
+			<Boton
 					className="px-6 py-3 text-base bg-bg-secondary text-text-primary border border-bg-secondary hover:bg-bg-hover"
 					onClick={() => navigate("/noticias")}
 				>
 					← Volver a Noticias
-				</Button>
+			</Boton>
 			</div>
 		);
 	}
@@ -73,12 +72,12 @@ const Noticia = () => {
 
 			<hr className="border-none border-t border-[#eee] m-0" />
 
-			<Button
+			<Boton
 				className="px-6 py-3 text-base bg-bg-secondary text-text-primary border border-bg-secondary hover:bg-bg-hover"
 				onClick={() => navigate("/noticias")}
 			>
 				← Volver a Noticias
-			</Button>
+			</Boton>
 		</div>
 	);
 };

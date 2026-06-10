@@ -1,16 +1,25 @@
+// React
 import { useEffect, useState } from "react";
+// Iconos
 import { IoIosImages } from "react-icons/io";
 import { IoNewspaper, IoPlanet } from "react-icons/io5";
+// Store
 import { useCosmosStore } from "../../store/cosmosStore";
+// Datos
+import { noticias } from "../../data/noticias";
+import { sistemaSolar } from "../../data/sistemaSolar";
 
-function Counter({ target }) {
+// Animación de conteo progresivo hasta el valor objetivo
+function Contador({ target }) {
 	const [count, setCount] = useState(0);
 
 	useEffect(() => {
 		if (target === 0) return;
+		// 1. Define la duración y el inicio de la animación
 		const duration = 2000;
 		const start = performance.now();
 
+		// 2. Anima el contador con requestAnimationFrame
 		let rafId;
 		const animate = (now) => {
 			const elapsed = now - start;
@@ -32,22 +41,24 @@ function Counter({ target }) {
 	);
 }
 
+// Configuración de las estadísticas a mostrar
 const stats = [
 	{ icon: IoIosImages, label: "Imágenes NASA", key: "images" },
 	{ icon: IoNewspaper, label: "Noticias", key: "news" },
 	{ icon: IoPlanet, label: "Planetas", key: "planets" },
 ];
 
-function StatsBar({ glass }) {
+// Renderiza la barra de estadísticas con contadores animados
+function BarraEstadisticas({ glass }) {
+	// 1. Obtiene los datos del store y los módulos de datos
 	const imagesGaleria = useCosmosStore((s) => s.imagesGaleria);
-	const noticias = useCosmosStore((s) => s.noticias);
-	const sistemaSolar = useCosmosStore((s) => s.sistemaSolar);
 	const counts = {
 		images: imagesGaleria?.length || 0,
 		news: noticias?.length || 0,
 		planets: sistemaSolar?.planetas?.length || 0,
 	};
 
+	// 2. Genera los items con sus iconos y contadores
 	const items = stats.map(({ icon: Icon, label, key }) => (
 		<div
 			key={key}
@@ -61,7 +72,7 @@ function StatsBar({ glass }) {
 				<Icon />
 			</div>
 			<div className="flex flex-col">
-				<Counter target={counts[key]} />
+				<Contador target={counts[key]} />
 				<span className="text-sm text-text-secondary whitespace-nowrap">
 					{label}
 				</span>
@@ -69,6 +80,7 @@ function StatsBar({ glass }) {
 		</div>
 	));
 
+	// 3. Renderiza con o sin fondo glass según la prop
 	if (glass) {
 		return (
 			<div className="flex flex-col items-stretch md:flex-row h-full">
@@ -86,4 +98,4 @@ function StatsBar({ glass }) {
 	);
 }
 
-export default StatsBar;
+export default BarraEstadisticas;

@@ -1,7 +1,11 @@
+// Store
 import { useCosmosStore } from "../../store/cosmosStore";
+// Hooks
 import useInView from "../../hooks/useInView";
 
-function FeaturedContent() {
+// Renderiza la imagen astronómica del día con skeleton loading
+function ContenidoDestacado() {
+	// 1. Obtiene la imagen del día del store
 	const dailyImage = useCosmosStore((s) => s.dailyImage);
 	const isLoading = !dailyImage?.url;
 	const [ref, inView] = useInView({ threshold: 0.15 });
@@ -14,7 +18,9 @@ function FeaturedContent() {
 			<div className={`max-w-[1200px] w-full min-h-[580px] mx-auto grid grid-cols-1 gap-8 items-center bg-bg-surface rounded-xl p-6 md:grid-cols-2 md:gap-15 md:p-10 md:min-h-[450px] ${inView ? "animate-stagger-1" : "opacity-0"}`}>
 				{isLoading ? (
 					<>
+						{/* Skeleton de la imagen */}
 						<div className="w-full aspect-[16/9] rounded-lg bg-gradient-to-r from-[#2a2a4a] via-[#3a3a5a] to-[#2a2a4a] bg-[length:200%_100%] animate-[shimmer_1.5s_infinite]" />
+						{/* Skeleton del texto */}
 						<div className="flex flex-col gap-3">
 							<div
 								className="h-8 rounded-sm bg-gradient-to-r from-[#2a2a4a] via-[#3a3a5a] to-[#2a2a4a] bg-[length:200%_100%] animate-[shimmer_1.5s_infinite]"
@@ -26,6 +32,7 @@ function FeaturedContent() {
 					</>
 				) : (
 					<>
+						{/* Imagen astronómica del día */}
 						<div className="rounded-lg overflow-hidden">
 							<img
 								src={dailyImage.url}
@@ -33,6 +40,7 @@ function FeaturedContent() {
 								className="w-full block aspect-video object-cover"
 							/>
 						</div>
+						{/* Información de la imagen */}
 						<div className="flex flex-col gap-4">
 							<h2 className="text-[1.5rem] md:text-2xl text-bg-secondary m-0">
 								Imagen Astronómica del Día
@@ -43,6 +51,7 @@ function FeaturedContent() {
 							<p className="text-text-on-surface leading-[1.6] m-0 line-clamp-4">
 								{dailyImage.explanation}
 							</p>
+							{/* Enlace a la imagen en alta resolución en NASA */}
 							<a
 								href={dailyImage.hdurl}
 								target="_blank"
@@ -59,4 +68,4 @@ function FeaturedContent() {
 	);
 }
 
-export default FeaturedContent;
+export default ContenidoDestacado;

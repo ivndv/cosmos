@@ -1,11 +1,15 @@
+// React
 import { Component } from "react";
 
-class ErrorBoundary extends Component {
+// Captura errores de la interfaz y muestra una pantalla de fallback
+class LimiteErrores extends Component {
 	constructor(props) {
 		super(props);
+		// 1. Inicializa el estado sin errores
 		this.state = { hasError: false, error: null };
 	}
 
+	// 2. Actualiza el estado cuando ocurre un error
 	static getDerivedStateFromError(error) {
 		return { hasError: true, error };
 	}
@@ -14,10 +18,12 @@ class ErrorBoundary extends Component {
 		if (this.state.hasError) {
 			return (
 				<div className="min-h-screen flex flex-col items-center justify-center gap-4 p-8 text-center">
+					{/* Mensaje de error genérico para el usuario */}
 					<h1 className="text-2xl font-bold">Algo salió mal</h1>
 					<p className="text-text-on-surface max-w-md">
 						Ocurrió un error inesperado. Recarga la página o intenta más tarde.
 					</p>
+					{/* Botón para recargar la página */}
 					<button
 						type="button"
 						onClick={() => window.location.reload()}
@@ -29,8 +35,9 @@ class ErrorBoundary extends Component {
 			);
 		}
 
+		// 3. Renderiza los hijos si no hay errores
 		return this.props.children;
 	}
 }
 
-export default ErrorBoundary;
+export default LimiteErrores;

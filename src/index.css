@@ -1,26 +1,30 @@
 @import "tailwindcss";
 
 @theme {
+	/* Colores de fondo */
 	--color-bg-primary: #0d0d1a;
 	--color-bg-secondary: #1a1a2e;
 	--color-bg-surface: #ffffff;
 	--color-bg-surface-alt: #f0f0f5;
 
+	/* Colores de texto */
 	--color-text-primary: #ffffff;
 	--color-text-secondary: #a0a0b8;
 	--color-text-muted: #999;
 	--color-text-on-surface: #555;
 
+	/* Colores de interacción */
 	--color-bg-hover: #2d2d5e;
-
 	--color-accent: #7c6af7;
 	--color-accent-hover: #8b7bf9;
 
+	/* Bordes redondeados */
 	--radius-sm: 8px;
 	--radius-md: 12px;
 	--radius-lg: 16px;
 	--radius-xl: 24px;
 
+	/* Sombras */
 	--shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
 	--shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
 	--shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -29,6 +33,7 @@
 	--shadow-img: 0 4px 18px rgba(0, 0, 0, 0.12);
 	--shadow-btn: 0 4px 10px rgba(0, 0, 0, 0.15);
 
+	/* Animaciones */
 	--animate-fade-in: fadeIn 0.2s ease;
 	--animate-fade-in-slow: fadeIn 0.4s ease;
 	--animate-slide-up: slideUp 0.25s ease;
@@ -43,6 +48,7 @@
 	--animate-hero-4: fadeInUp 0.5s ease 0.55s forwards;
 }
 
+/* Estilos base del documento */
 html {
 	scroll-behavior: smooth;
 	line-height: 1.15;
@@ -51,6 +57,7 @@ html {
 	font-weight: 400;
 }
 
+/* Encabezados en negrita */
 h1, h2, h3, h4 {
 	font-weight: 700;
 }
@@ -67,21 +74,25 @@ img {
 	border-style: none;
 }
 
+/* Animación de aparición */
 @keyframes fadeIn {
 	from { opacity: 0; }
 	to { opacity: 1; }
 }
 
+/* Animación de aparición con desplazamiento hacia arriba */
 @keyframes fadeInUp {
 	from { opacity: 0; transform: translateY(20px); }
 	to { opacity: 1; transform: translateY(0); }
 }
 
+/* Animación de deslizamiento hacia arriba */
 @keyframes slideUp {
 	from { opacity: 0; transform: translateY(24px); }
 	to { opacity: 1; transform: translateY(0); }
 }
 
+/* Animación de brillo para skeletons */
 @keyframes shimmer {
 	0% { background-position: 200% 0; }
 	100% { background-position: -200% 0; }

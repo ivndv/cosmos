@@ -1,0 +1,9 @@
+// Exporta los componentes reutilizables de la aplicación
+export { default as Header } from "./Header/Header";
+export { default as Footer } from "./Footer/Footer";
+export { default as BannerCTA } from "./BannerCTA/BannerCTA";
+export { default as ContenidoDestacado } from "./ContenidoDestacado/ContenidoDestacado";
+export { default as BarraEstadisticas } from "./BarraEstadisticas/BarraEstadisticas";
+export { default as LimiteErrores } from "./LimiteErrores/LimiteErrores";
+export { default as IrArriba } from "./IrArriba/IrArriba";
+export { default as Boton } from "./Boton/Boton";

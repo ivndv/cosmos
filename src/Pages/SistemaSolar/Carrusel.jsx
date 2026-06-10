@@ -1,20 +1,26 @@
+// React
 import { useEffect, useState } from "react";
 
-const Carousel = ({ categoriaSeleccionada, datos }) => {
+// Carrusel interactivo con navegación anterior/siguiente y dots
+function Carrusel({ categoriaSeleccionada, datos }) {
+	// 1. Inicializa el índice de la imagen actual
 	const [currentIndex, setCurrentIndex] = useState(0);
 
+	// 2. Reinicia el índice al cambiar de categoría
 	useEffect(() => {
 		setCurrentIndex(0);
 	}, []);
 
 	if (!datos || datos.length === 0) return null;
 
+	// 3. Navegación anterior
 	const handlePrev = () => {
 		setCurrentIndex((prevIndex) =>
 			prevIndex === 0 ? datos.length - 1 : prevIndex - 1,
 		);
 	};
 
+	// 4. Navegación siguiente
 	const handleNext = () => {
 		setCurrentIndex((prevIndex) =>
 			prevIndex === datos.length - 1 ? 0 : prevIndex + 1,
@@ -25,11 +31,14 @@ const Carousel = ({ categoriaSeleccionada, datos }) => {
 
 	return (
 		<div className="flex flex-col items-center gap-5 w-full max-w-[900px] mx-auto">
+			{/* Nombre de la categoría */}
 			<h2 className="text-[1.8rem] text-bg-secondary m-0 capitalize">
 				{categoriaSeleccionada}
 			</h2>
 
+			{/* Contenedor principal del carrusel */}
 			<div className="flex items-center gap-2 w-full md:gap-4">
+				{/* Botón anterior */}
 				<button
 					type="button"
 					onClick={handlePrev}
@@ -39,6 +48,7 @@ const Carousel = ({ categoriaSeleccionada, datos }) => {
 					◀
 				</button>
 
+				{/* Imagen y descripción actual */}
 				<div className="flex-1 bg-bg-surface border border-[#e8e8e8] rounded-lg overflow-hidden shadow-glass flex flex-col">
 					{currentItem ? (
 						<>
@@ -66,6 +76,7 @@ const Carousel = ({ categoriaSeleccionada, datos }) => {
 					)}
 				</div>
 
+				{/* Botón siguiente */}
 				<button
 					type="button"
 					onClick={handleNext}
@@ -76,6 +87,7 @@ const Carousel = ({ categoriaSeleccionada, datos }) => {
 				</button>
 			</div>
 
+			{/* Dots de navegación */}
 			<div className="flex justify-center gap-2 mt-2.5 flex-wrap">
 				{datos.map((item, index) => (
 					<button
@@ -93,6 +105,6 @@ const Carousel = ({ categoriaSeleccionada, datos }) => {
 			</div>
 		</div>
 	);
-};
+}
 
-export default Carousel;
+export default Carrusel;

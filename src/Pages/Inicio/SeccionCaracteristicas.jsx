@@ -1,13 +1,20 @@
+// Store
 import { useCosmosStore } from "../../store/cosmosStore";
-import FeatureCard from "./FeatureCard";
+// Datos
+import { noticias } from "../../data/noticias";
+import { sistemaSolar } from "../../data/sistemaSolar";
+// Componentes
+import TarjetaCaracteristica from "./TarjetaCaracteristica";
+// Hooks
 import useInView from "../../hooks/useInView";
 
-function FeaturesSection() {
-	const noticias = useCosmosStore((s) => s.noticias);
+// Renderiza las tarjetas de características principales de la landing
+function SeccionCaracteristicas() {
+	// 1. Obtiene los datos para las tarjetas
 	const imagesGaleria = useCosmosStore((s) => s.imagesGaleria);
-	const sistemaSolar = useCosmosStore((s) => s.sistemaSolar);
 	const planetas = sistemaSolar?.planetas || [];
 
+	// 2. Define las características con sus imágenes y enlaces
 	const features = [
 		{
 			titulo: "Galería Espacial",
@@ -41,17 +48,19 @@ function FeaturesSection() {
 			className="w-full flex flex-col items-center justify-center px-5 py-16 md:py-28"
 		>
 			<div className={`grid grid-cols-1 gap-5 w-full max-w-[1200px] mx-auto md:grid-cols-2 ${inView ? "animate-stagger-1" : "opacity-0"}`}>
+				{/* Primeras dos tarjetas */}
 				{features.slice(0, 2).map((feature, idx) => (
 					<div key={feature.titulo} className={`${inView ? "animate-fade-in-up" : ""}`} style={{ animationDelay: `${idx * 0.1}s` }}>
-						<FeatureCard {...feature} />
+						<TarjetaCaracteristica {...feature} />
 					</div>
 				))}
+				{/* Tercera tarjeta ocupa todo el ancho */}
 				<div className={`col-span-full w-full mt-0 md:mt-5 ${inView ? "animate-fade-in-up" : ""}`} style={{ animationDelay: "0.2s" }}>
-					<FeatureCard {...features[2]} />
+					<TarjetaCaracteristica {...features[2]} />
 				</div>
 			</div>
 		</section>
 	);
 }
 
-export default FeaturesSection;
+export default SeccionCaracteristicas;
