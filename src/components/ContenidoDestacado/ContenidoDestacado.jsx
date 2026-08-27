@@ -1,7 +1,8 @@
 // Store
-import { useCosmosStore } from "../../store/cosmosStore";
+
 // Hooks
 import useInView from "../../hooks/useInView";
+import { useCosmosStore } from "../../store/cosmosStore";
 
 // Renderiza la imagen astronómica del día con skeleton loading
 function ContenidoDestacado() {
@@ -15,7 +16,9 @@ function ContenidoDestacado() {
 			ref={ref}
 			className="w-full flex flex-col items-center justify-center px-5 py-16 md:py-28"
 		>
-			<div className={`max-w-[1200px] w-full min-h-[580px] mx-auto grid grid-cols-1 gap-8 items-center bg-bg-surface rounded-xl p-6 md:grid-cols-2 md:gap-15 md:p-10 md:min-h-[450px] ${inView ? "animate-stagger-1" : "opacity-0"}`}>
+			<div
+				className={`max-w-[1200px] w-full min-h-[580px] mx-auto grid grid-cols-1 gap-8 items-center bg-bg-surface rounded-xl p-6 md:grid-cols-2 md:gap-15 md:p-10 md:min-h-[450px] ${inView ? "animate-stagger-1" : "opacity-0"}`}
+			>
 				{isLoading ? (
 					<>
 						{/* Skeleton de la imagen */}

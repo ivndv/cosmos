@@ -1,5 +1,5 @@
 // Iconos
-import { IoHeart, IoBookmark } from "react-icons/io5";
+import { IoBookmark, IoHeart } from "react-icons/io5";
 
 // Renderiza una tarjeta de imagen con acciones de like y guardar
 function TarjetaImagen({

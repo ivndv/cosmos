@@ -68,16 +68,16 @@ function Header() {
 					</span>
 				</div>
 
-			{isMobile && (
-				<FaBars
-					onClick={toggleSidebar}
-					onKeyDown={(e) => e.key === "Enter" && toggleSidebar()}
-					className="cursor-pointer text-2xl text-text-primary"
-					aria-label="Abrir menú"
-					role="button"
-					tabIndex={0}
-				/>
-			)}
+				{isMobile && (
+					<FaBars
+						onClick={toggleSidebar}
+						onKeyDown={(e) => e.key === "Enter" && toggleSidebar()}
+						className="cursor-pointer text-2xl text-text-primary"
+						aria-label="Abrir menú"
+						role="button"
+						tabIndex={0}
+					/>
+				)}
 
 				{isMobile ? (
 					<Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />

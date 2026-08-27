@@ -12,12 +12,12 @@ const Noticia = () => {
 		return (
 			<div className="px-5 pt-[100px] pb-16 max-w-[820px] mx-auto flex flex-col gap-7">
 				<p>Noticia no encontrada.</p>
-			<Boton
+				<Boton
 					className="px-6 py-3 text-base bg-bg-secondary text-text-primary border border-bg-secondary hover:bg-bg-hover"
 					onClick={() => navigate("/noticias")}
 				>
 					← Volver a Noticias
-			</Boton>
+				</Boton>
 			</div>
 		);
 	}

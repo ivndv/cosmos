@@ -10,8 +10,12 @@ const Inicio = lazy(() => import("./Pages/Inicio/Inicio.jsx"));
 const Galería = lazy(() => import("./Pages/Galeria/Galería.jsx"));
 const Noticias = lazy(() => import("./Pages/Noticias/Noticias.jsx"));
 const Noticia = lazy(() => import("./Pages/Noticias/Noticia.jsx"));
-const SistemaSolar = lazy(() => import("./Pages/SistemaSolar/SistemaSolar.jsx"));
-const NoEncontrado = lazy(() => import("./Pages/NoEncontrado/NoEncontrado.jsx"));
+const SistemaSolar = lazy(
+	() => import("./Pages/SistemaSolar/SistemaSolar.jsx"),
+);
+const NoEncontrado = lazy(
+	() => import("./Pages/NoEncontrado/NoEncontrado.jsx"),
+);
 
 // Spinner mostrado mientras carga una página lazy
 function SpinnerFallback() {

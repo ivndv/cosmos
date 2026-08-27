@@ -9,7 +9,10 @@ const Footer = () => {
 					{/* Columna 1: Identidad y redes */}
 					<div className="flex flex-col gap-4 items-center text-center max-w-xs">
 						<div className="flex items-center gap-2 text-text-primary text-[1.4rem] font-bold justify-center">
-							<Icon icon="lucide:rocket" className="text-[1.6rem] text-accent" />
+							<Icon
+								icon="lucide:rocket"
+								className="text-[1.6rem] text-accent"
+							/>
 							Cosmos
 						</div>
 						<p className="text-text-secondary text-sm leading-[1.6] text-center max-w-xs">

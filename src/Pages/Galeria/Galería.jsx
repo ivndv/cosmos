@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { useCosmosStore } from "../../store/cosmosStore";
-import Spinner from "./Spinner";
-import Titulo from "./Titulo";
-import TarjetaImagen from "./TarjetaImagen";
 import ModalImagen from "./ModalImagen";
+import Spinner from "./Spinner";
+import TarjetaImagen from "./TarjetaImagen";
+import Titulo from "./Titulo";
 
 const SCROLLBAR_CLASSES =
 	"[&::-webkit-scrollbar]:h-[6px] [&::-webkit-scrollbar-track]:bg-[#f1f1f1] [&::-webkit-scrollbar-track]:rounded-sm [&::-webkit-scrollbar-thumb]:bg-[#c0c0c0] [&::-webkit-scrollbar-thumb]:rounded-sm";
@@ -51,7 +51,10 @@ const Galeria = () => {
 
 	return (
 		<div className="px-5 pt-[100px] pb-15 max-w-[1200px] mx-auto flex flex-col gap-15">
-			<ModalImagen image={selectedImage} onClose={() => setSelectedImage(null)} />
+			<ModalImagen
+				image={selectedImage}
+				onClose={() => setSelectedImage(null)}
+			/>
 
 			<div className="flex flex-col items-center text-center gap-3 animate-stagger-1">
 				<Titulo titulo="Galería Espacial" />
@@ -118,7 +121,9 @@ function ImageGallerySection({
 					Aún no has guardado ninguna imagen.
 				</p>
 			) : (
-				<div className={`flex flex-row gap-4 overflow-x-auto pb-3 ${SCROLLBAR_CLASSES}`}>
+				<div
+					className={`flex flex-row gap-4 overflow-x-auto pb-3 ${SCROLLBAR_CLASSES}`}
+				>
 					{items.map((image, idx) => (
 						<TarjetaImagen
 							key={image.date}

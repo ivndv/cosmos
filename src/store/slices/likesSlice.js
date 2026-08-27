@@ -9,10 +9,10 @@ export const createLikesSlice = (set) => ({
 			const likedImages = state.likedImages.some(
 				(liked) => liked.date === image.date,
 			)
-				// 2. Si ya tiene like, lo quita
-				? state.likedImages.filter((liked) => liked.date !== image.date)
-				// 3. Si no tiene like, lo agrega
-				: [...state.likedImages, image];
+				? // 2. Si ya tiene like, lo quita
+					state.likedImages.filter((liked) => liked.date !== image.date)
+				: // 3. Si no tiene like, lo agrega
+					[...state.likedImages, image];
 			return { likedImages };
 		});
 	},
@@ -23,10 +23,10 @@ export const createLikesSlice = (set) => ({
 			const savedImages = state.savedImages.some(
 				(saved) => saved.date === image.date,
 			)
-				// 2. Si ya está guardada, la quita
-				? state.savedImages.filter((saved) => saved.date !== image.date)
-				// 3. Si no está guardada, la agrega
-				: [...state.savedImages, image];
+				? // 2. Si ya está guardada, la quita
+					state.savedImages.filter((saved) => saved.date !== image.date)
+				: // 3. Si no está guardada, la agrega
+					[...state.savedImages, image];
 			return { savedImages };
 		});
 	},

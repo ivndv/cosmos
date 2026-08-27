@@ -1,12 +1,13 @@
 // Store
-import { useCosmosStore } from "../../store/cosmosStore";
+
 // Datos
 import { noticias } from "../../data/noticias";
 import { sistemaSolar } from "../../data/sistemaSolar";
-// Componentes
-import TarjetaCaracteristica from "./TarjetaCaracteristica";
 // Hooks
 import useInView from "../../hooks/useInView";
+import { useCosmosStore } from "../../store/cosmosStore";
+// Componentes
+import TarjetaCaracteristica from "./TarjetaCaracteristica";
 
 // Renderiza las tarjetas de características principales de la landing
 function SeccionCaracteristicas() {
@@ -47,15 +48,24 @@ function SeccionCaracteristicas() {
 			ref={ref}
 			className="w-full flex flex-col items-center justify-center px-5 py-16 md:py-28"
 		>
-			<div className={`grid grid-cols-1 gap-5 w-full max-w-[1200px] mx-auto md:grid-cols-2 ${inView ? "animate-stagger-1" : "opacity-0"}`}>
+			<div
+				className={`grid grid-cols-1 gap-5 w-full max-w-[1200px] mx-auto md:grid-cols-2 ${inView ? "animate-stagger-1" : "opacity-0"}`}
+			>
 				{/* Primeras dos tarjetas */}
 				{features.slice(0, 2).map((feature, idx) => (
-					<div key={feature.titulo} className={`${inView ? "animate-fade-in-up" : ""}`} style={{ animationDelay: `${idx * 0.1}s` }}>
+					<div
+						key={feature.titulo}
+						className={`${inView ? "animate-fade-in-up" : ""}`}
+						style={{ animationDelay: `${idx * 0.1}s` }}
+					>
 						<TarjetaCaracteristica {...feature} />
 					</div>
 				))}
 				{/* Tercera tarjeta ocupa todo el ancho */}
-				<div className={`col-span-full w-full mt-0 md:mt-5 ${inView ? "animate-fade-in-up" : ""}`} style={{ animationDelay: "0.2s" }}>
+				<div
+					className={`col-span-full w-full mt-0 md:mt-5 ${inView ? "animate-fade-in-up" : ""}`}
+					style={{ animationDelay: "0.2s" }}
+				>
 					<TarjetaCaracteristica {...features[2]} />
 				</div>
 			</div>

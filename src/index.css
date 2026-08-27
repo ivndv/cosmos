@@ -58,7 +58,10 @@ html {
 }
 
 /* Encabezados en negrita */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
 	font-weight: 700;
 }
 
@@ -76,24 +79,44 @@ img {
 
 /* Animación de aparición */
 @keyframes fadeIn {
-	from { opacity: 0; }
-	to { opacity: 1; }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 /* Animación de aparición con desplazamiento hacia arriba */
 @keyframes fadeInUp {
-	from { opacity: 0; transform: translateY(20px); }
-	to { opacity: 1; transform: translateY(0); }
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 /* Animación de deslizamiento hacia arriba */
 @keyframes slideUp {
-	from { opacity: 0; transform: translateY(24px); }
-	to { opacity: 1; transform: translateY(0); }
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 /* Animación de brillo para skeletons */
 @keyframes shimmer {
-	0% { background-position: 200% 0; }
-	100% { background-position: -200% 0; }
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
 }

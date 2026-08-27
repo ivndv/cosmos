@@ -4,7 +4,9 @@ async function fetchWithRetry(url, retries = 1, delay = 2000) {
 		const response = await fetch(url);
 		if (response.ok) return response;
 		if (attempt < retries) {
-			console.log(`[NASA] Reintentando ${url} (intento ${attempt + 1}/${retries})`);
+			console.log(
+				`[NASA] Reintentando ${url} (intento ${attempt + 1}/${retries})`,
+			);
 			await new Promise((r) => setTimeout(r, delay));
 		}
 	}
@@ -28,7 +30,11 @@ export const createNASASlice = (set) => ({
 			set({ dailyImage: data, dailyLoading: false });
 		} catch (error) {
 			console.log("[NASA] Error al obtener imagen del día:", error.message);
-			set({ dailyError: "No se pudo cargar la imagen del día. Intenta de nuevo más tarde.", dailyLoading: false });
+			set({
+				dailyError:
+					"No se pudo cargar la imagen del día. Intenta de nuevo más tarde.",
+				dailyLoading: false,
+			});
 		}
 	},
 	imagesGaleria: [],
@@ -46,7 +52,11 @@ export const createNASASlice = (set) => ({
 			set({ imagesGaleria: data, galeriaLoading: false });
 		} catch (error) {
 			console.log("[NASA] Error al obtener galería:", error.message);
-			set({ galeriaError: "No se pudo cargar la galería. Intenta de nuevo más tarde.", galeriaLoading: false });
+			set({
+				galeriaError:
+					"No se pudo cargar la galería. Intenta de nuevo más tarde.",
+				galeriaLoading: false,
+			});
 		}
 	},
 });

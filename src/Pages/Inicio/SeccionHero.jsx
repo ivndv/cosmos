@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 // Iconos
 import { IoIosInformationCircle } from "react-icons/io";
+import BarraEstadisticas from "../../components/BarraEstadisticas/BarraEstadisticas";
 // Componentes
 import Boton from "../../components/Boton/Boton";
-import BarraEstadisticas from "../../components/BarraEstadisticas/BarraEstadisticas";
 // Store
 import { useCosmosStore } from "../../store/cosmosStore";
 
@@ -86,9 +86,7 @@ function SeccionHero() {
 						</div>
 					</>
 				) : dailyError ? (
-					<p className="text-[3vw] md:text-[15px] text-red-400">
-						{dailyError}
-					</p>
+					<p className="text-[3vw] md:text-[15px] text-red-400">{dailyError}</p>
 				) : (
 					<p className="text-[3vw] md:text-[15px]">
 						Cargando imagen del día...

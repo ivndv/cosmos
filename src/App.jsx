@@ -1,7 +1,7 @@
 // React Router
 import { Outlet } from "react-router-dom";
 // Componentes
-import { Header, Footer } from "./components";
+import { Footer, Header } from "./components";
 
 // Layout principal con header, contenido y footer
 function App() {

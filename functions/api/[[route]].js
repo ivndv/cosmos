@@ -20,9 +20,11 @@ const MAX_REQUESTS = 30;
 
 // Obtiene la IP real del cliente desde Cloudflare
 function getClientIP(c) {
-	return c.req.header("cf-connecting-ip")
-		|| c.req.header("x-forwarded-for")?.split(",")[0]?.trim()
-		|| "unknown";
+	return (
+		c.req.header("cf-connecting-ip") ||
+		c.req.header("x-forwarded-for")?.split(",")[0]?.trim() ||
+		"unknown"
+	);
 }
 
 // Verifica si la IP no ha excedido el límite de requests
@@ -53,7 +55,10 @@ app.get("/api/nasa", async (c) => {
 	// 1. Rate limiting por IP
 	const ip = getClientIP(c);
 	if (!checkRateLimit(ip)) {
-		return c.json({ error: "Demasiadas solicitudes. Intenta de nuevo más tarde." }, 429);
+		return c.json(
+			{ error: "Demasiadas solicitudes. Intenta de nuevo más tarde." },
+			429,
+		);
 	}
 
 	// 2. Obtiene el endpoint y la API key del entorno
@@ -72,7 +77,8 @@ app.get("/api/nasa", async (c) => {
 	const url = `${NASA_BASE}/${endpoint}${query}`;
 
 	// 5. Verifica cache antes de consultar a NASA
-	const cacheKey = endpoint + (c.req.query("count") ? `&count=${c.req.query("count")}` : "");
+	const cacheKey =
+		endpoint + (c.req.query("count") ? `&count=${c.req.query("count")}` : "");
 	const cached = cache.get(cacheKey);
 	if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
 		return c.json(cached.data, cached.status);
@@ -85,10 +91,16 @@ app.get("/api/nasa", async (c) => {
 	try {
 		res = await fetch(url, { signal: controller.signal });
 	} catch (err) {
-		console.error("[NASA] Error de red:", err.message, "URL:", sanitizeUrl(url, apiKey));
-		const msg = err.name === "AbortError"
-			? "La API de NASA tardó demasiado en responder. Intenta de nuevo."
-			: "No se pudo conectar con la API de NASA";
+		console.error(
+			"[NASA] Error de red:",
+			err.message,
+			"URL:",
+			sanitizeUrl(url, apiKey),
+		);
+		const msg =
+			err.name === "AbortError"
+				? "La API de NASA tardó demasiado en responder. Intenta de nuevo."
+				: "No se pudo conectar con la API de NASA";
 		return c.json({ error: msg }, 502);
 	} finally {
 		clearTimeout(timeout);
@@ -99,7 +111,14 @@ app.get("/api/nasa", async (c) => {
 	try {
 		data = await res.json();
 	} catch (err) {
-		console.error("[NASA] Error al parsear respuesta:", err.message, "Status:", res.status, "URL:", sanitizeUrl(url, apiKey));
+		console.error(
+			"[NASA] Error al parsear respuesta:",
+			err.message,
+			"Status:",
+			res.status,
+			"URL:",
+			sanitizeUrl(url, apiKey),
+		);
 		return c.json({ error: "Respuesta inválida de la API de NASA" }, 502);
 	}
 
