@@ -1,0 +1,22 @@
+# Action compuesta para preparar el entorno de pruebas E2E y Smoke con Playwright
+name: Setup E2E
+description: Reutiliza el setup base de Bun, gestiona la caché de binarios de Playwright e instala Chromium
+
+runs:
+  using: composite
+  steps:
+    # 1. Ejecuta la action base para preparar Node.js, Bun y dependencias
+    - name: Setup Bun env
+      uses: ./.github/actions/setup
+
+    # 2. Restaura la caché del navegador Chromium de Playwright en ~/.cache/ms-playwright
+    - name: Cache Playwright browsers
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ hashFiles('bun.lock') }}
+
+    # 3. Instala Chromium y dependencias del sistema operativo si no estaban en caché
+    - name: Install Playwright chromium
+      shell: bash
+      run: bunx playwright install --with-deps chromium

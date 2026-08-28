@@ -7,7 +7,7 @@
 		"dev": "vite",
 		"dev:full": "bun run build && bunx wrangler pages dev dist/ --ip localhost --port 4321",
 		"build": "vite build",
-		"lint": "biome lint .",
+		"lint": "biome lint --write .",
 		"format": "biome format --write .",
 		"check": "biome check --write .",
 		"preview": "vite preview",
