@@ -1,0 +1,10 @@
+# Cosmos
+
+> Cosmos es un explorador visual del universo y plataforma de divulgación astronómica construida para descubrir los misterios del cosmos a través de imágenes astronómicas, el Sistema Solar y noticias científicas.
+
+## Páginas Principales
+
+- [Inicio](https://cosmos.mgdc.site/): Foto astronómica del día (APOD) de la NASA con descripción detallada y características destacadas del cosmos.
+- [Galería Espacial](https://cosmos.mgdc.site/galeria): Colección dinámica de imágenes del universo con visor en alta resolución y sistema para guardar favoritos.
+- [Sistema Solar](https://cosmos.mgdc.site/sistema-solar): Catálogo interactivo de planetas, lunas, estrellas, asteroides y cometas con datos orbitales y características físicas.
+- [Noticias](https://cosmos.mgdc.site/noticias): Artículos y novedades sobre astronomía, misiones espaciales y avances científicos.

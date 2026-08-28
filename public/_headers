@@ -88,11 +88,19 @@
   Cache-Control: public, max-age=0, s-maxage=3600, must-revalidate
 
 # ==============================================================================
-# Manifest y Service Worker
-# Sin cache para actualización inmediata
+# Manifest, Service Worker y Archivos de Indexación (SEO / AI)
 # ==============================================================================
 /manifest.json
   Cache-Control: public, max-age=0, must-revalidate
 
 /sw.js
   Cache-Control: public, max-age=0, must-revalidate
+
+/robots.txt
+  Cache-Control: public, max-age=86400, s-maxage=86400
+
+/sitemap.xml
+  Cache-Control: public, max-age=86400, s-maxage=86400
+
+/llms.txt
+  Cache-Control: public, max-age=86400, s-maxage=86400

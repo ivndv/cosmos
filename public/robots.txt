@@ -1,0 +1,7 @@
+# Reglas de rastreo para robots y motores de búsqueda
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Mapa del sitio
+Sitemap: https://cosmos.mgdc.site/sitemap.xml
