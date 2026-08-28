@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BsRocket } from "react-icons/bs";
 import { FaBars } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
@@ -53,7 +53,11 @@ function Header() {
 			}}
 		>
 			<div className="w-full max-w-[1200px] flex justify-between items-center flex-row-reverse md:flex-row">
-				<div className="flex items-center gap-2">
+				<Link
+					to="/"
+					className="flex items-center gap-2 no-underline cursor-pointer"
+					aria-label="Cosmos Inicio"
+				>
 					<div className="flex items-center">
 						<BsRocket
 							className="text-accent transition-all duration-300"
@@ -66,7 +70,7 @@ function Header() {
 					<span className="text-[5vw] m-0 text-text-primary md:text-[20px] font-bold">
 						Cosmos
 					</span>
-				</div>
+				</Link>
 
 				{isMobile && (
 					<FaBars

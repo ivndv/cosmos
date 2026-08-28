@@ -15,7 +15,10 @@ function TarjetaImagen({
 	return (
 		<div
 			className="relative shrink-0 w-[260px] h-[200px] rounded-lg overflow-hidden cursor-pointer border border-[#e0e0e0] group animate-fade-in-up"
-			onClick={() => onSelect?.(image)}
+			onClick={(e) => {
+				if (e.target.closest("button")) return;
+				onSelect?.(image);
+			}}
 			role="button"
 			tabIndex={0}
 			onKeyDown={(e) => e.key === "Enter" && onSelect?.(image)}

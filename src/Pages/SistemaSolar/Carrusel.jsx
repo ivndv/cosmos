@@ -8,8 +8,10 @@ function Carrusel({ categoriaSeleccionada, datos }) {
 
 	// 2. Reinicia el índice al cambiar de categoría
 	useEffect(() => {
-		setCurrentIndex(0);
-	}, []);
+		if (categoriaSeleccionada) {
+			setCurrentIndex(0);
+		}
+	}, [categoriaSeleccionada]);
 
 	if (!datos || datos.length === 0) return null;
 
