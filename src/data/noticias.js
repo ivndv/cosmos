@@ -1,3 +1,5 @@
+import { ASSETS_BASE } from "../config/assets";
+
 export const noticias = [
 	{
 		id: 1,
@@ -8,7 +10,7 @@ export const noticias = [
 			"En un hallazgo revolucionario, los científicos de la NASA han detectado posibles señales de agua bajo la superficie de Marte. Este descubrimiento se produce después de años de exploración y estudios en el planeta rojo. Los datos recopilados por el radar de penetración de la nave Mars Reconnaissance Orbiter sugieren que podría haber reservas de agua que no solo son vitales para futuras misiones tripuladas, sino que también podrían ser indicativas de vida microbiana en el pasado. La investigación sobre la composición del suelo marciano continúa, ya que este hallazgo podría redefinir nuestra comprensión del clima y la geología de Marte, así como su potencial para ser colonizado por humanos en el futuro.",
 		author: "Juan Pérez",
 		date: "2024-09-23",
-		url: "/img/exploración-en-marte.png",
+		url: `${ASSETS_BASE}/exploración-en-marte.png`,
 		categoria: "Exploración Espacial",
 		keywords: ["Marte", "agua", "NASA", "exploración"],
 		views: 7345,
@@ -22,7 +24,7 @@ export const noticias = [
 			"El cohete Space Launch System (SLS) y la cápsula Orion han realizado un exitoso vuelo de prueba alrededor de la Luna, marcando un hito importante en la misión Artemis I. Esta misión, que representa un regreso significativo a la exploración lunar, tiene como objetivo establecer una presencia humana sostenible en la Luna para finales de esta década. Durante el vuelo, se recopilaron datos cruciales que se utilizarán para perfeccionar los sistemas de navegación y control, y garantizar la seguridad de las futuras misiones tripuladas.",
 		author: "Juan Pérez",
 		date: "2024-09-19",
-		url: "/img/La-misión-artemis-I.png",
+		url: `${ASSETS_BASE}/La-misión-artemis-I.png`,
 		categoria: "Exploración Espacial",
 		keywords: ["Artemis I", "Luna", "NASA", "SLS"],
 		views: 4821,
@@ -36,7 +38,7 @@ export const noticias = [
 			"Este descubrimiento se realizó en el remanente de la supernova SN 1987A, donde se ha encontrado un pulsar que emite radiación en forma de destellos. Los pulsars son estrellas de neutrones extremadamente densas y su estudio es crucial para comprender la evolución de las estrellas y los eventos cataclísmicos en el universo.",
 		author: "Claudia Reyes",
 		date: "2024-09-14",
-		url: "/img/pulsar.png",
+		url: `${ASSETS_BASE}/pulsar.png`,
 		categoria: "Astronomía",
 		keywords: ["pulsar", "supernova", "astronomía", "SN 1987A"],
 		views: 9172,
@@ -50,7 +52,7 @@ export const noticias = [
 			"La colaboración Event Horizon Telescope ha conseguido un hito histórico al obtener la primera imagen de un agujero negro supermasivo en la galaxia M87. Esta imagen, que muestra la sombra del agujero negro rodeada por un anillo de luz, proporciona evidencia visual de la existencia de estos objetos misteriosos y ayuda a validar teorías sobre la gravedad y la relatividad.",
 		author: "Claudia Reyes",
 		date: "2024-09-17",
-		url: "/img/agujero-negro.png",
+		url: `${ASSETS_BASE}/agujero-negro.png`,
 		categoria: "Astrofísica",
 		keywords: [
 			"agujero negro",
@@ -70,7 +72,7 @@ export const noticias = [
 			"Investigadores han detectado ondas gravitacionales generadas por la fusión de dos estrellas de neutrones en una galaxia lejana. Este evento ha sido catalogado como uno de los más energéticos jamás observados, ofreciendo información valiosa sobre la naturaleza de las estrellas de neutrones y los procesos que ocurren en sus colisiones.",
 		author: "Fernando Torres",
 		date: "2024-08-29",
-		url: "/img/olas-gravitacionales.png",
+		url: `${ASSETS_BASE}/olas-gravitacionales.png`,
 		categoria: "Astrofísica",
 		keywords: [
 			"ondas gravitacionales",
@@ -89,7 +91,7 @@ export const noticias = [
 			"La Agencia Espacial Europea ha lanzado varios satélites que utilizarán tecnología avanzada para monitorear cambios climáticos y desastres naturales desde el espacio. Con capacidades de resolución mejoradas y sensores de última generación, estos satélites permitirán un seguimiento más cercano de la actividad atmosférica, el deshielo polar y la deforestación.",
 		author: "Fernando Torres",
 		date: "2024-09-12",
-		url: "/img/innovaciones-en-satélites.png",
+		url: `${ASSETS_BASE}/innovaciones-en-satélites.png`,
 		categoria: "Satélites y Naves Espaciales",
 		keywords: [
 			"satélites",

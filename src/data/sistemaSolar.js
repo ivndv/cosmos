@@ -1,3 +1,5 @@
+import { ASSETS_BASE } from "../config/assets";
+
 export const sistemaSolar = {
 	estrellas: [
 		{
@@ -7,7 +9,7 @@ export const sistemaSolar = {
 			diametro: "1,391,000 km",
 			explanation: "El Sol es la estrella en el centro del Sistema Solar.",
 			distanciaDeLaTierra: "149.6 millones km",
-			url: "/img/sol.jpg",
+			url: `${ASSETS_BASE}/sol.jpg`,
 		},
 	],
 	planetas: [
@@ -18,7 +20,7 @@ export const sistemaSolar = {
 			diametro: "4,880 km",
 			distanciaDelSol: "57.91 millones km",
 			hayVida: false,
-			url: "/img/mercurio.jpg",
+			url: `${ASSETS_BASE}/mercurio.jpg`,
 		},
 		{
 			title: "Venus",
@@ -27,7 +29,7 @@ export const sistemaSolar = {
 			diametro: "12,104 km",
 			distanciaDelSol: "108.2 millones km",
 			hayVida: false,
-			url: "/img/venus.jpg",
+			url: `${ASSETS_BASE}/venus.jpg`,
 		},
 		{
 			title: "Tierra",
@@ -36,7 +38,7 @@ export const sistemaSolar = {
 			diametro: "12,742 km",
 			distanciaDelSol: "149.6 millones km",
 			hayVida: true,
-			url: "/img/tierra.jpg",
+			url: `${ASSETS_BASE}/tierra.jpg`,
 		},
 		{
 			title: "Marte",
@@ -45,7 +47,7 @@ export const sistemaSolar = {
 			diametro: "6,779 km",
 			distanciaDelSol: "227.9 millones km",
 			hayVida: false,
-			url: "/img/marte.jpg",
+			url: `${ASSETS_BASE}/marte.jpg`,
 		},
 		{
 			title: "Júpiter",
@@ -54,7 +56,7 @@ export const sistemaSolar = {
 			diametro: "139,820 km",
 			distanciaDelSol: "778.5 millones km",
 			hayVida: false,
-			url: "/img/jupiter.jpg",
+			url: `${ASSETS_BASE}/jupiter.jpg`,
 		},
 		{
 			title: "Saturno",
@@ -63,7 +65,7 @@ export const sistemaSolar = {
 			diametro: "116,460 km",
 			distanciaDelSol: "1.434 mil millones km",
 			hayVida: false,
-			url: "/img/saturno.jpg",
+			url: `${ASSETS_BASE}/saturno.jpg`,
 		},
 		{
 			title: "Urano",
@@ -72,7 +74,7 @@ export const sistemaSolar = {
 			diametro: "50,724 km",
 			distanciaDelSol: "2.871 mil millones km",
 			hayVida: false,
-			url: "/img/urano.jpg",
+			url: `${ASSETS_BASE}/urano.jpg`,
 		},
 		{
 			title: "Neptuno",
@@ -81,7 +83,7 @@ export const sistemaSolar = {
 			diametro: "49,244 km",
 			distanciaDelSol: "4.495 mil millones km",
 			hayVida: false,
-			url: "/img/neptuno.jpg",
+			url: `${ASSETS_BASE}/neptuno.jpg`,
 		},
 	],
 	lunas: [
@@ -90,7 +92,7 @@ export const sistemaSolar = {
 			planeta: "Tierra",
 			diametro: "3,474.8 km",
 			explanation: "La Luna es el único satélite natural de la Tierra.",
-			url: "/img/luna.jpg",
+			url: `${ASSETS_BASE}/luna.jpg`,
 		},
 		{
 			title: "Fobos",
@@ -98,14 +100,14 @@ export const sistemaSolar = {
 			diametro: "22.4 km",
 			explanation:
 				"Fobos es el más grande y cercano de los dos satélites naturales de Marte.",
-			url: "/img/fobos.jpg",
+			url: `${ASSETS_BASE}/fobos.jpg`,
 		},
 		{
 			title: "Deimos",
 			planeta: "Marte",
 			diametro: "12.4 km",
 			explanation: "Deimos es el más pequeño de los satélites de Marte.",
-			url: "/img/deimos.jpg",
+			url: `${ASSETS_BASE}/deimos.jpg`,
 		},
 		{
 			title: "Europa",
@@ -113,7 +115,7 @@ export const sistemaSolar = {
 			diametro: "3,121.6 km",
 			explanation:
 				"Europa es una de las lunas de Júpiter y puede tener un océano bajo su superficie.",
-			url: "/img/europa.jpg",
+			url: `${ASSETS_BASE}/europa.jpg`,
 		},
 		{
 			title: "Titán",
@@ -121,7 +123,7 @@ export const sistemaSolar = {
 			diametro: "5,151.8 km",
 			explanation:
 				"Titán es la luna más grande de Saturno y tiene una atmósfera densa.",
-			url: "/img/titan.jpg",
+			url: `${ASSETS_BASE}/titan.jpg`,
 		},
 	],
 	asteroides: [
@@ -131,7 +133,7 @@ export const sistemaSolar = {
 				"Ceres es el asteroide más grande del cinturón de asteroides y se clasifica como un planeta enano.",
 			diametro: "940 km",
 			distanciaDelSol: "413.7 millones km",
-			url: "/img/ceres.jpg",
+			url: `${ASSETS_BASE}/ceres.jpg`,
 		},
 		{
 			title: "Palas",
@@ -139,7 +141,7 @@ export const sistemaSolar = {
 				"Palas es el segundo asteroide más grande del cinturón de asteroides.",
 			diametro: "512 km",
 			distanciaDelSol: "413.7 millones km",
-			url: "/img/palas.jpg",
+			url: `${ASSETS_BASE}/palas.jpg`,
 		},
 	],
 	cometas: [
@@ -148,14 +150,14 @@ export const sistemaSolar = {
 			explanation:
 				"El cometa Halley es un cometa de período corto que es visible desde la Tierra aproximadamente cada 76 años.",
 			periodoOrbital: "76 años",
-			url: "/img/cometa-halley.jpg",
+			url: `${ASSETS_BASE}/cometa-halley.jpg`,
 		},
 		{
 			title: "Cometa Hale-Bopp",
 			explanation:
 				"El cometa Hale-Bopp fue uno de los cometas más brillantes del siglo XX, visible a simple vista durante varios meses.",
 			periodoOrbital: "2,520 años",
-			url: "/img/cometa-hale-bopp.jpg",
+			url: `${ASSETS_BASE}/cometa-hale-bopp.jpg`,
 		},
 	],
 };
