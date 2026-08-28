@@ -1,4 +1,4 @@
-# Logs
+# Logs y depuración
 logs
 *.log
 npm-debug.log*
@@ -7,25 +7,42 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Dependencias
+node_modules/
+
+# Salida de build
+dist/
+dist-ssr/
+
+# Variables de entorno y secretos locales
 .env
+.dev.vars
+*.local
 
-
-# Editor directories and files
+# Configuración de editores e IDEs
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
+# Archivos específicos del sistema operativo
+.DS_Store
+
+# Documentación y notas locales
 /docs/
-.codegraph
-.wrangler
-.dev.vars
+por-hacer.md
+TODO.md
+
+# Estado local de Cloudflare y Wrangler
+.wrangler/
+
+# Índice de CodeGraph
+.codegraph/
+
+# Reportes y resultados de tests
+test-results/
+playwright-report/
