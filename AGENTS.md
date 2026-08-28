@@ -26,9 +26,6 @@ Explora el universo con imágenes astronómicas, noticias y sistema solar. Vite 
 - `bun run test:smoke` — Smoke tests rápidos sobre `dist/` en Cloudflare Pages local (Playwright).
 - `bun run test:e2e` — Suite completa de pruebas End-to-End en Chromium (Playwright).
 
-### Scripts de Infraestructura
-- `bun scripts/upload-assets.js` — Subir y sincronizar imágenes a Cloudflare R2 (`cosmos-assets`).
-
 ## Convenciones
 
 - Español en código, rutas, componentes y comentarios.
