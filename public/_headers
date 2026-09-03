@@ -20,8 +20,8 @@
   # Fuerza HTTPS en el navegador por 1 año con subdominios incluidos
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   
-  # Content Security Policy: NASA APOD, Cloudflare R2 Assets, YouTube embeds y fuentes
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: https://cosmos-assets.mgdc.site https://pub-58ad167276b34129820fefbbad3627c6.r2.dev https://*.nasa.gov https://*.youtube.com https://img.youtube.com; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://api.iconify.design https://api.simplesvg.com https://api.unisvg.com https://api.nasa.gov; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https: https://cosmos-assets.mgdc.site https://pub-58ad167276b34129820fefbbad3627c6.r2.dev; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests;
+  # Content Security Policy: NASA APOD, Cloudflare R2 Assets, YouTube embeds, fuentes y Umami Analytics
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://umami.fluxdv.icu; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: https://cosmos-assets.mgdc.site https://pub-58ad167276b34129820fefbbad3627c6.r2.dev https://*.nasa.gov https://*.youtube.com https://img.youtube.com; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://umami.fluxdv.icu https://api.iconify.design https://api.simplesvg.com https://api.unisvg.com https://api.nasa.gov; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https: https://cosmos-assets.mgdc.site https://pub-58ad167276b34129820fefbbad3627c6.r2.dev; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests;
 
 # ==============================================================================
 # Cache Headers para Chunks y Assets con Hash Inmutable (Vite /assets/*)
