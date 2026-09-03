@@ -16,32 +16,38 @@
 		"test:unit": "vitest run",
 		"test:unit:watch": "vitest",
 		"test:e2e": "bun run build && playwright test",
-		"test:smoke": "bun run build && playwright test --config=playwright.smoke.config.js"
+		"test:smoke": "bun run build && playwright test --config=playwright.smoke.config.js",
+		"snyk:auth": "snyk auth",
+		"snyk:test": "snyk test",
+		"snyk:monitor": "snyk monitor"
 	},
 	"dependencies": {
 		"@fontsource/outfit": "^5.3.0",
 		"@tailwindcss/vite": "^4.3.3",
+		"fdir": "^6.5.0",
 		"hono": "^4.13.5",
+		"picomatch": "^4.0.7",
 		"react": "^19.2.8",
 		"react-dom": "^19.2.8",
 		"react-icons": "^5.7.0",
-		"react-router-dom": "^7.18.2",
+		"react-router-dom": "^7.18.3",
 		"tailwindcss": "^4.3.3",
 		"zustand": "^5.0.15"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.5.10",
+		"@biomejs/biome": "^2.5.12",
 		"@iconify/react": "^6.0.2",
 		"@playwright/test": "^1.62.1",
 		"@testing-library/jest-dom": "^7.0.1",
 		"@testing-library/react": "^16.3.3",
 		"@types/react": "^19.2.18",
-		"@types/react-dom": "^19.2.5",
+		"@types/react-dom": "^19.2.7",
 		"@vitejs/plugin-react": "latest",
 		"jsdom": "^30.0.1",
+		"snyk": "^1.1307.0",
 		"vite": "^8.2.2",
-		"vitest": "^4.1.11",
-		"wrangler": "^4.127.0"
+		"vitest": "^5.0.0",
+		"wrangler": "^4.129.0"
 	},
 	"description": "Cosmos — Explora el universo con imágenes astronómicas, noticias espaciales y datos del sistema solar.",
 	"keywords": [
