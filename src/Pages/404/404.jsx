@@ -4,7 +4,7 @@ import { IoRocket } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 // Renderiza la página 404 cuando la ruta no existe
-function NoEncontrado() {
+function Page404() {
 	return (
 		<div className="w-full min-h-[70vh] flex flex-col justify-center items-center gap-6 p-8 text-center">
 			{/* Icono de cohete inclinado */}
@@ -25,4 +25,4 @@ function NoEncontrado() {
 	);
 }
 
-export default NoEncontrado;
+export default Page404;

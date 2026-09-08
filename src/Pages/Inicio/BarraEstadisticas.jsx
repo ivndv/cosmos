@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { IoIosImages } from "react-icons/io";
 import { IoNewspaper, IoPlanet } from "react-icons/io5";
 // Datos
-import { noticias } from "../../data/noticias";
-import { sistemaSolar } from "../../data/sistemaSolar";
+import { noticias } from "@/data/noticias";
+import { sistemaSolar } from "@/data/sistemaSolar";
 // Store
-import { useCosmosStore } from "../../store/cosmosStore";
+import { useCosmosStore } from "@/store/cosmosStore";
 
 // Animación de conteo progresivo hasta el valor objetivo
 function Contador({ target }) {

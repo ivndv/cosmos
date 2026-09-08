@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import ModalImagen from "../../src/Pages/Galeria/ModalImagen";
+import ModalImagen from "@/Pages/Galeria/ModalImagen";
 import { mockApodImage } from "./helpers";
 
 describe("ModalImagen (Unit Tests)", () => {

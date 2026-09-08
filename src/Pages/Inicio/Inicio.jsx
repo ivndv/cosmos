@@ -1,5 +1,5 @@
-import BannerCTA from "../../components/BannerCTA/BannerCTA";
-import ContenidoDestacado from "../../components/ContenidoDestacado/ContenidoDestacado";
+import BannerCTA from "./BannerCTA";
+import ContenidoDestacado from "./ContenidoDestacado";
 import SeccionCaracteristicas from "./SeccionCaracteristicas";
 import SeccionHero from "./SeccionHero";
 

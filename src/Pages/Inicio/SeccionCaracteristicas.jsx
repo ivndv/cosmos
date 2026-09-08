@@ -1,11 +1,11 @@
 // Store
 
 // Datos
-import { noticias } from "../../data/noticias";
-import { sistemaSolar } from "../../data/sistemaSolar";
+import { noticias } from "@/data/noticias";
+import { sistemaSolar } from "@/data/sistemaSolar";
 // Hooks
-import useInView from "../../hooks/useInView";
-import { useCosmosStore } from "../../store/cosmosStore";
+import useInView from "@/hooks/useInView";
+import { useCosmosStore } from "@/store/cosmosStore";
 // Componentes
 import TarjetaCaracteristica from "./TarjetaCaracteristica";
 

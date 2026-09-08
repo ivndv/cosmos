@@ -1,4 +1,4 @@
-import useCarrusel from "../../hooks/useCarousel";
+import useCarrusel from "@/hooks/useCarousel";
 
 const Carrusel = ({ images }) => {
 	const { currentIndex, setCurrentIndex } = useCarrusel(images);

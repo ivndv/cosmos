@@ -1,8 +1,8 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Boton from "../../components/Boton/Boton";
-import { noticias } from "../../data/noticias";
+import Boton from "@/components/ui/Boton";
+import { noticias } from "@/data/noticias";
 import Titulo from "../Galeria/Titulo";
 
 const generarSlug = (title) =>

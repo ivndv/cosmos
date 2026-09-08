@@ -1,9 +1,9 @@
 // React Router
 import { Link } from "react-router-dom";
-// Hooks
-import useInView from "../../hooks/useInView";
 // Componentes
-import Boton from "../Boton/Boton";
+import Boton from "@/components/ui/Boton";
+// Hooks
+import useInView from "@/hooks/useInView";
 
 // Renderiza la sección de llamada a la acción para explorar la galería
 function BannerCTA() {

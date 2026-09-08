@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { sistemaSolar } from "../../data/sistemaSolar";
+import { sistemaSolar } from "@/data/sistemaSolar";
 import Descripcion from "../Galeria/Descripcion";
 import Titulo from "../Galeria/Titulo";
 import Carrusel from "./Carrusel";

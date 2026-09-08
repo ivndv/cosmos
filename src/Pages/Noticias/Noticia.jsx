@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import Boton from "../../components/Boton/Boton";
-import { noticias } from "../../data/noticias";
+import Boton from "@/components/ui/Boton";
+import { noticias } from "@/data/noticias";
 
 const Noticia = () => {
 	const location = useLocation();

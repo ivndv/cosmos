@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { create } from "zustand";
-import { useCosmosStore } from "../../src/store/cosmosStore";
-import { createNASASlice } from "../../src/store/slices/nasaSlice";
+import { useCosmosStore } from "@/store/cosmosStore";
+import { createNASASlice } from "@/store/slices/nasaSlice";
 import {
 	mockApodGallery,
 	mockApodImage,

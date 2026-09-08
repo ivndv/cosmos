@@ -8,7 +8,8 @@ import { BrowserRouter } from "react-router-dom";
 // Estilos globales
 import "./index.css";
 // Componentes
-import { IrArriba, LimiteErrores } from "./components";
+import IrArriba from "@/components/common/IrArriba";
+import LimiteErrores from "@/components/common/LimiteErrores";
 // Rutas
 import AppRoutes from "./routes";
 

@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { act } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import useCarrusel from "../../src/hooks/useCarousel";
+import useCarrusel from "@/hooks/useCarousel";
 import { mockApodGallery } from "./helpers";
 
 describe("useCarrusel (Unit Tests)", () => {

@@ -1,8 +1,7 @@
 // Store
 
-// Hooks
-import useInView from "../../hooks/useInView";
-import { useCosmosStore } from "../../store/cosmosStore";
+import useInView from "@/hooks/useInView";
+import { useCosmosStore } from "@/store/cosmosStore";
 
 // Renderiza la imagen astronómica del día con skeleton loading
 function ContenidoDestacado() {

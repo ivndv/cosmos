@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import LimiteErrores from "../../src/components/LimiteErrores/LimiteErrores";
+import LimiteErrores from "@/components/common/LimiteErrores";
 
 // Componente helper que simula un fallo durante el renderizado
 function ComponenteQueFalla({ shouldThrow = false }) {

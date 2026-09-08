@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import TarjetaImagen from "../../src/Pages/Galeria/TarjetaImagen";
+import TarjetaImagen from "@/Pages/Galeria/TarjetaImagen";
 import { mockApodImage } from "./helpers";
 
 describe("TarjetaImagen (Unit Tests)", () => {

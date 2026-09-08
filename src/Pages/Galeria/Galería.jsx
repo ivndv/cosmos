@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useCosmosStore } from "../../store/cosmosStore";
+import { useCosmosStore } from "@/store/cosmosStore";
 import ModalImagen from "./ModalImagen";
 import Spinner from "./Spinner";
 import TarjetaImagen from "./TarjetaImagen";

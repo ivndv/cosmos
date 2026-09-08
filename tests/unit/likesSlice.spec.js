@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { create } from "zustand";
-import { useCosmosStore } from "../../src/store/cosmosStore";
-import { createLikesSlice } from "../../src/store/slices/likesSlice";
+import { useCosmosStore } from "@/store/cosmosStore";
+import { createLikesSlice } from "@/store/slices/likesSlice";
 import { mockApodGallery, mockApodImage } from "./helpers";
 
 describe("likesSlice (Unit Tests)", () => {

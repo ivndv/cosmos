@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react";
 // Iconos
 import { IoIosInformationCircle } from "react-icons/io";
-import BarraEstadisticas from "../../components/BarraEstadisticas/BarraEstadisticas";
 // Componentes
-import Boton from "../../components/Boton/Boton";
+import Boton from "@/components/ui/Boton";
 // Store
-import { useCosmosStore } from "../../store/cosmosStore";
+import { useCosmosStore } from "@/store/cosmosStore";
+import BarraEstadisticas from "./BarraEstadisticas";
 
 // Gradiente de fondo predeterminado
 const gradientBg =
