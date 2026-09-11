@@ -1,4 +1,4 @@
-# Cosmos (Explorador del Universo)
+# Cosmos 
 
 ## Descripción
 
