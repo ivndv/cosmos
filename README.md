@@ -6,18 +6,18 @@ Aplicación web moderna e interactiva diseñada para explorar y descubrir los mi
 
 ## Características
 
-- **Galería interactiva NASA APOD**: Explora colecciones de imágenes astronómicas en alta calidad consumidas en tiempo real desde la API de la NASA, con soporte para modal detallado y animaciones de carga.
-- **Gestión de favoritos y likes**: Interactúa dando me gusta y guardando tus fotografías astronómicas favoritas con persistencia de estado global gestionada con Zustand.
-- **Feed de noticias espaciales**: Sección dedicada a la divulgación astronómica con artículos detallados y enrutamiento dinámico por slug.
-- **Explorador del Sistema Solar**: Datos interactivos sobre planetas y cuerpos celestes acompañados de carruseles informativos.
-- **Diseño moderno y responsivo**: Estilos estilizados con Tailwind CSS v4, tipografía Outfit (@fontsource/outfit) y componentes modulares con soporte para manejo de errores (Error Boundary).
+- **Galería interactiva NASA APOD**: Explora fotografías astronómicas en alta calidad provistas diariamente por la NASA, con visor detallado de cada imagen.
+- **Gestión de favoritos**: Guarda y administra tus fotografías astronómicas preferidas para verlas cuando quieras.
+- **Noticias espaciales**: Artículos actualizados sobre descubrimientos astronómicos y avances en la exploración del universo.
+- **Explorador del Sistema Solar**: Guía interactiva con datos clave, características y distancias de los planetas y cuerpos celestes.
+- **Diseño moderno y responsivo**: Interfaz fluida adaptada a cualquier dispositivo con tema oscuro espacial.
 
 ## Secciones
 
-1. **Inicio**: Hero con llamada a la acción, resumen de características destacadas y carrusel visual.
-2. **Galería Espacial**: Cuadrícula dinámica de imágenes astronómicas (15 por lote), visor modal con descripción detallada y acciones interactivas.
-3. **Noticias**: Artículos y novedades espaciales estructuradas con navegación individualizada (`/noticias/:slug`).
-4. **Sistema Solar**: Vista interactiva con datos astronómicos de los planetas y carrusel de navegación.
+1. **Inicio**: Portada con llamada a la acción, novedades destacadas y accesos rápidos.
+2. **Galería Espacial**: Cuadrícula de imágenes astronómicas diarias con visor modal y descripciones oficiales de la NASA.
+3. **Noticias**: Publicaciones de divulgación espacial con vista de lectura individual.
+4. **Sistema Solar**: Fichas interactivas con datos astronómicos organizados por planeta.
 
 ## Uso
 
@@ -27,12 +27,13 @@ Aplicación web moderna e interactiva diseñada para explorar y descubrir los mi
 
 ## Tecnologías Utilizadas
 
-- **Frontend**: Vite 8, React 19, React Router 7, Tailwind CSS 4, @fontsource/outfit 5
+- **Frontend**: Vite 8, React 19, React Router 7, Tailwind CSS 4
 - **Backend**: Cloudflare Pages Functions (Hono 4)
-- **API Externa**: NASA Open APIs (`APOD - Astronomy Picture of the Day`)
-- **State**: Zustand 5
+- **API Externa**: NASA Open APIs (APOD)
+- **Estado**: Zustand 5
 - **Iconos**: React Icons 5, @iconify/react 6
-- **Herramientas**: Bun 1, Biome 2, Vitest 4, jsdom 30, Wrangler 4
+- **Testing**: Vitest, Playwright
+- **Herramientas**: Bun, Biome, TypeScript
 - **Infra**: Cloudflare Pages
 
 ## Instalación
