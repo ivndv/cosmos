@@ -6,18 +6,18 @@ inputs:
   bun-version:
     description: Versión de Bun a utilizar
     required: false
-    default: "1.3.14"
+    default: "1.4.4"
   node-version:
     description: Versión de Node.js a utilizar
     required: false
-    default: "24.19.0"
+    default: "24.22.1"
 
 runs:
   using: composite
   steps:
     # 1. Configura el runtime de Node.js requerido por ciertas herramientas de build
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
         node-version: ${{ inputs.node-version }}
 
@@ -29,7 +29,7 @@ runs:
 
     # 3. Restaura la caché de node_modules usando el hash de bun.lock para acelerar el pipeline
     - name: Cache node_modules
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: node_modules
         key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
