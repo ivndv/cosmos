@@ -1,11 +1,15 @@
 // React
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // Iconos
 import { IoIosInformationCircle } from "react-icons/io";
 // Componentes
 import Boton from "@/components/ui/Boton";
-// Store
-import { useCosmosStore } from "@/store/cosmosStore";
+// Config
+import { ASSETS_BASE } from "@/config/assets";
+// Hooks
+import { useDailyImage } from "@/hooks/useNasa";
+// Utilidades
+import { revealDelay } from "@/utils/animations";
 import BarraEstadisticas from "./BarraEstadisticas";
 
 // Gradiente de fondo predeterminado
@@ -14,18 +18,18 @@ const gradientBg =
 
 // Renderiza la sección hero con la imagen astronómica del día de fondo
 function SeccionHero() {
-	// 1. Obtiene la imagen del día y el estado de carga
-	const dailyImage = useCosmosStore((s) => s.dailyImage);
-	const dailyError = useCosmosStore((s) => s.dailyError);
-	const fetchDailyImage = useCosmosStore((s) => s.fetchDailyImage);
+	// 1. Imagen del día (TanStack Query deduplica la petición)
+	const { data: dailyImage, error: dailyError } = useDailyImage();
 	const [tooltipVisible, setTooltipVisible] = useState(false);
 
-	// 2. Carga la imagen del día al montar el componente
-	useEffect(() => {
-		fetchDailyImage();
-	}, [fetchDailyImage]);
-
 	const toggleTooltip = () => setTooltipVisible((prev) => !prev);
+
+	// Imagen de fondo: APOD solo cuando es imagen; si es video, su miniatura.
+	const fallbackHero = `${ASSETS_BASE}/agujero-negro.png`;
+	const heroSrc =
+		dailyImage?.media_type === "image"
+			? dailyImage.url
+			: dailyImage?.thumbnail_url || fallbackHero;
 
 	// 3. Desplazamiento suave a la sección de características
 	const scrollToCaracteristicas = () => {
@@ -36,14 +40,14 @@ function SeccionHero() {
 
 	return (
 		<section
-			className="w-full min-h-screen flex flex-col justify-start gap-5 items-center px-5 pb-16 text-white text-center relative overflow-hidden md:h-screen md:justify-center"
+			className="w-full min-h-[100dvh] flex flex-col justify-center gap-6 items-center px-5 pt-16 pb-16 text-white text-center relative overflow-hidden"
 			style={{ backgroundImage: gradientBg }}
 		>
 			{/* Imagen de fondo APOD */}
-			{dailyImage?.url && (
+			{heroSrc && (
 				<div
 					className="absolute inset-0 bg-cover bg-center"
-					style={{ backgroundImage: `url(${dailyImage.url})` }}
+					style={{ backgroundImage: `url(${heroSrc})` }}
 					aria-hidden="true"
 				/>
 			)}
@@ -52,7 +56,7 @@ function SeccionHero() {
 			<div
 				className="absolute inset-0 z-1"
 				style={{
-					backgroundColor: dailyImage?.url
+					backgroundColor: heroSrc
 						? "rgba(0, 0, 0, 0.589)"
 						: "rgba(0, 0, 0, 0.3)",
 				}}
@@ -86,7 +90,9 @@ function SeccionHero() {
 						</div>
 					</>
 				) : dailyError ? (
-					<p className="text-[3vw] md:text-[15px] text-red-400">{dailyError}</p>
+					<p className="text-[3vw] md:text-[15px] text-red-400">
+						No se pudo cargar la imagen del día
+					</p>
 				) : (
 					<p className="text-[3vw] md:text-[15px]">
 						Cargando imagen del día...
@@ -95,22 +101,35 @@ function SeccionHero() {
 			</div>
 
 			{/* Contenido principal del hero */}
-			<div className="flex flex-col items-center gap-10 z-2 w-full h-auto px-[1vw] pt-[20vh] pb-[10vh] md:px-0 md:pt-0 md:pb-0">
-				<h1 className="text-[8vw] md:text-[3rem] z-2 animate-hero-1">
+			<div className="flex flex-col items-center gap-8 z-2 w-full max-w-[1200px] mx-auto px-[1vw] md:px-0">
+				<h1
+					className="text-[8.1vw] md:text-[3.2rem] z-2 animate-reveal"
+					style={revealDelay(0, 80)}
+				>
 					Explora el Universo
 				</h1>
-				<p className="text-[4vw] px-0 z-2 md:text-[1.2rem] md:px-[50px] animate-hero-2">
-					Explora el universo desde aquí: imágenes astronómicas diarias, las
-					últimas noticias y un viaje por cada planeta.
+				<p
+					className="text-[3.7vw] px-0 z-2 md:text-[1.2rem] max-w-[620px] mx-auto animate-reveal font-grotesk"
+					style={revealDelay(1, 80)}
+				>
+					Imágenes del universo capturadas por la NASA, noticias de exploración
+					espacial y una guía completa de los planetas y cuerpos de nuestro
+					sistema solar.
 				</p>
-				{/* Barra de estadísticas con efecto glass */}
-				<div className="w-full max-w-[1200px] h-[380px] bg-[rgba(13,13,26,0.5)] backdrop-blur-[10px] rounded-lg border border-[rgba(255,255,255,0.08)] z-2 shrink-0 md:h-[150px] animate-hero-3">
+				{/* Barra de estadísticas como tarjetas */}
+				<div
+					className="w-full max-w-[900px] z-2 animate-reveal"
+					style={revealDelay(2, 80)}
+				>
 					<BarraEstadisticas glass />
 				</div>
 				{/* Botón para explorar */}
-				<div className="flex justify-center z-2 shrink-0 animate-hero-4">
+				<div
+					className="flex justify-center z-2 shrink-0 animate-reveal"
+					style={revealDelay(3, 80)}
+				>
 					<Boton
-						className="w-[110px] h-[30px] text-sm bg-bg-secondary text-text-primary border border-bg-secondary hover:bg-bg-hover"
+						className="px-8 py-2.5 text-[14px] bg-accent/10 text-text-primary border border-accent/60 hover:bg-accent hover:text-bg-primary"
 						onClick={scrollToCaracteristicas}
 					>
 						Explorar

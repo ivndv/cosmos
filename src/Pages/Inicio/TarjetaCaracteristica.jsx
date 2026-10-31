@@ -1,34 +1,67 @@
 // React Router
 import { Link } from "react-router-dom";
 
-// Renderiza una tarjeta con imagen de fondo, título, descripción y enlace
-function TarjetaCaracteristica({ titulo, descripcion, image, to }) {
+// Renderiza una tarjeta con imagen, título, descripción y enlace.
+// horizontal: la imagen va a la izquierda en desktop (para la tarjeta ancha).
+function TarjetaCaracteristica({
+	titulo,
+	descripcion,
+	image,
+	to,
+	horizontal = false,
+	imageRight = false,
+}) {
 	return (
-		<div className="relative w-full h-[300px] md:h-auto md:min-h-[220px] rounded-md overflow-hidden cursor-pointer group">
-			{/* Imagen de fondo con efecto hover */}
+		<Link
+			to={to}
+			className={`group flex h-full overflow-hidden rounded-lg no-underline bg-bg-surface border border-black/[0.06] shadow-sm transition-colors duration-200 hover:border-accent/40 ${
+				horizontal
+					? imageRight
+						? "flex-col md:flex-row-reverse"
+						: "flex-col md:flex-row"
+					: "flex-col"
+			}`}
+		>
+			{/* Imagen */}
 			<div
-				className="absolute inset-0 bg-cover bg-center transition-transform duration-[400ms] group-hover:scale-105"
-				style={{ backgroundImage: `url(${image})` }}
-			/>
-			{/* Gradiente oscuro superpuesto */}
-			<div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 transition-all duration-300 group-hover:from-black/90 group-hover:via-black/50 group-hover:to-black/20" />
-			{/* Contenido de la tarjeta */}
-			<div className="relative z-1 flex flex-col justify-end h-full p-6 text-white">
-				<h2 className="text-[1.6rem] md:text-[1.3rem] font-bold mb-2 [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
+				className={
+					horizontal
+						? "relative w-full overflow-hidden aspect-[16/9] md:aspect-auto md:w-1/2 md:min-h-[220px]"
+						: "relative w-full overflow-hidden aspect-[16/9]"
+				}
+			>
+				{image ? (
+					<img
+						src={image}
+						alt={titulo}
+						loading="lazy"
+						className="h-full w-full object-cover"
+					/>
+				) : (
+					<div className="h-full w-full bg-gradient-to-br from-[#1a1a3e] to-[#0d0d1a]" />
+				)}
+			</div>
+
+			{/* Contenido */}
+			<div
+				className={`flex flex-col gap-2 p-6 ${
+					horizontal ? "md:w-1/2 md:justify-center md:p-8" : ""
+				}`}
+			>
+				<h2 className="m-0 text-[1.4rem] font-bold text-bg-secondary md:text-[1.55rem]">
 					{titulo}
 				</h2>
-				<p className="text-sm leading-[1.5] [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] opacity-90 mb-0 md:text-sm">
+				<p className="m-0 text-[14.5px] leading-[1.6] text-text-on-surface line-clamp-2">
 					{descripcion}
 				</p>
-				{/* Enlace a la sección */}
-				<Link
-					to={to}
-					className="mt-4 self-start inline-flex items-center justify-center px-4 py-2 text-sm font-semibold bg-transparent text-accent border border-accent rounded-md no-underline cursor-pointer transition-all duration-300 hover:bg-accent hover:text-text-primary"
-				>
-					Mostrar más
-				</Link>
+				<span className="mt-2 inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent">
+					Ver más
+					<span aria-hidden="true" className="">
+						→
+					</span>
+				</span>
 			</div>
-		</div>
+		</Link>
 	);
 }
 

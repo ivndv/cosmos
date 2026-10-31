@@ -1,18 +1,20 @@
 // Store
 
+// Componentes
+import EncabezadoSeccion from "@/components/ui/EncabezadoSeccion";
 // Datos
+import { ASSETS_BASE } from "@/config/assets";
 import { noticias } from "@/data/noticias";
 import { sistemaSolar } from "@/data/sistemaSolar";
 // Hooks
-import useInView from "@/hooks/useInView";
-import { useCosmosStore } from "@/store/cosmosStore";
-// Componentes
+import { useGalleryImages } from "@/hooks/useNasa";
 import TarjetaCaracteristica from "./TarjetaCaracteristica";
 
 // Renderiza las tarjetas de características principales de la landing
 function SeccionCaracteristicas() {
 	// 1. Obtiene los datos para las tarjetas
-	const imagesGaleria = useCosmosStore((s) => s.imagesGaleria);
+	const gallery = useGalleryImages({ page: 1 });
+	const primeraImagen = gallery.data?.images?.[0]?.url;
 	const planetas = sistemaSolar?.planetas || [];
 
 	// 2. Define las características con sus imágenes y enlaces
@@ -21,7 +23,7 @@ function SeccionCaracteristicas() {
 			titulo: "Galería Espacial",
 			descripcion:
 				"Descubre la belleza del universo a través de una colección curada de imágenes impresionantes, desde nebulosas brillantes hasta galaxias lejanas.",
-			image: imagesGaleria?.[0]?.url,
+			image: primeraImagen || `${ASSETS_BASE}/agujero-negro.png`,
 			to: "/galería-espacial",
 		},
 		{
@@ -40,33 +42,24 @@ function SeccionCaracteristicas() {
 		},
 	];
 
-	const [ref, inView] = useInView({ threshold: 0.15 });
-
 	return (
-		<section
-			id="caracteristicas"
-			ref={ref}
-			className="w-full flex flex-col items-center justify-center px-5 py-16 md:py-28"
-		>
-			<div
-				className={`grid grid-cols-1 gap-5 w-full max-w-[1200px] mx-auto md:grid-cols-2 ${inView ? "animate-stagger-1" : "opacity-0"}`}
-			>
-				{/* Primeras dos tarjetas */}
-				{features.slice(0, 2).map((feature, idx) => (
-					<div
-						key={feature.titulo}
-						className={`${inView ? "animate-fade-in-up" : ""}`}
-						style={{ animationDelay: `${idx * 0.1}s` }}
-					>
-						<TarjetaCaracteristica {...feature} />
-					</div>
-				))}
-				{/* Tercera tarjeta ocupa todo el ancho */}
-				<div
-					className={`col-span-full w-full mt-0 md:mt-5 ${inView ? "animate-fade-in-up" : ""}`}
-					style={{ animationDelay: "0.2s" }}
-				>
-					<TarjetaCaracteristica {...features[2]} />
+		<section id="caracteristicas" className="w-full px-5 py-16 md:py-24">
+			<div className="mx-auto flex w-full max-w-[1200px] flex-col gap-10">
+				<EncabezadoSeccion
+					eyebrow="Descubre"
+					titulo="Explora el Cosmos"
+					descripcion="Cuatro formas de acercarte al universo: imágenes reales, noticias de exploración y los cuerpos de nuestro sistema solar."
+				/>
+
+				<div className="flex w-full flex-col gap-8 animate-reveal">
+					{features.map((feature, i) => (
+						<TarjetaCaracteristica
+							key={feature.titulo}
+							{...feature}
+							horizontal
+							imageRight={i % 2 === 1}
+						/>
+					))}
 				</div>
 			</div>
 		</section>
