@@ -1,25 +1,28 @@
-// Barra de navegación de categorías para el sistema solar
+// Barra de categorías del sistema solar
 function Navbar({
 	categorias,
-	setCategoriaSeleccionada,
 	categoriaSeleccionada,
+	setCategoriaSeleccionada,
 }) {
 	return (
-		<nav className="w-full mb-5 overflow-x-auto [&::-webkit-scrollbar]:h-[6px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#d0d0d0] [&::-webkit-scrollbar-thumb]:rounded-sm">
-			<ul className="list-none flex justify-start gap-3 px-2.5 m-0 md:justify-center">
+		<nav
+			aria-label="Categorías del sistema solar"
+			className="w-full overflow-x-auto pb-1 [&::-webkit-scrollbar]:h-[6px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-sm [&::-webkit-scrollbar-thumb]:bg-[#d0d0d0]"
+		>
+			<ul className="m-0 flex list-none gap-2 p-0">
 				{categorias.map((categoria) => {
 					const isSelected = categoria === categoriaSeleccionada;
 					return (
 						<li key={categoria}>
-							{/* Botón de categoría */}
 							<button
 								type="button"
 								onClick={() => setCategoriaSeleccionada(categoria)}
-								className={`border-none rounded-xl px-4 py-2 text-sm font-semibold capitalize cursor-pointer whitespace-nowrap transition-all duration-200 md:px-6 md:py-2.5 md:text-base ${
+								aria-pressed={isSelected}
+								className={`cursor-pointer whitespace-nowrap rounded-md border px-4 py-2 text-sm font-semibold capitalize transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
 									isSelected
-										? "bg-bg-secondary text-text-primary"
-										: "bg-bg-surface-alt text-text-on-surface hover:bg-[#e0e0e8]"
-								} hover:-translate-y-0.5`}
+										? "border-bg-secondary bg-bg-secondary text-text-primary"
+										: "border-[#e0e0e0] bg-bg-surface text-text-on-surface hover:border-accent/50"
+								}`}
 							>
 								{categoria}
 							</button>
