@@ -2,6 +2,8 @@ import BannerCTA from "./BannerCTA";
 import ContenidoDestacado from "./ContenidoDestacado";
 import SeccionCaracteristicas from "./SeccionCaracteristicas";
 import SeccionHero from "./SeccionHero";
+import SeccionNoticias from "./SeccionNoticias";
+import SeccionSistemaSolar from "./SeccionSistemaSolar";
 
 function Inicio() {
 	return (
@@ -9,6 +11,8 @@ function Inicio() {
 			<SeccionHero />
 			<SeccionCaracteristicas />
 			<ContenidoDestacado />
+			<SeccionNoticias />
+			<SeccionSistemaSolar />
 			<BannerCTA />
 		</div>
 	);

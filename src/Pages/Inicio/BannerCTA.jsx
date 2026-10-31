@@ -2,17 +2,14 @@
 import { Link } from "react-router-dom";
 // Componentes
 import Boton from "@/components/ui/Boton";
+
 // Hooks
-import useInView from "@/hooks/useInView";
 
 // Renderiza la sección de llamada a la acción para explorar la galería
 function BannerCTA() {
-	const [ref, inView] = useInView({ threshold: 0.15 });
-
 	return (
 		<section
-			ref={ref}
-			className={`w-full min-h-[350px] py-10 px-5 bg-bg-primary flex flex-col items-center justify-center gap-8 text-center md:min-h-[400px] md:py-16 ${inView ? "animate-stagger-1" : "opacity-0"}`}
+			className={`w-full min-h-[350px] py-10 px-5 bg-bg-primary flex flex-col items-center justify-center gap-8 text-center md:min-h-[400px] md:py-16 animate-reveal`}
 		>
 			{/* Título principal de la sección */}
 			<h2 className="text-[7vw] md:text-[2.5rem] text-text-primary">
