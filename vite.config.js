@@ -15,6 +15,8 @@ export default defineConfig({
 		globals: true,
 		environment: "jsdom",
 		setupFiles: "./src/test/setup.js",
+		// Los tests siempre usan el camino real (fetch mockeado), nunca los fixtures
+		env: { VITE_USE_MOCKS: "false" },
 		include: [
 			"src/**/*.{test,spec}.{js,jsx}",
 			"tests/unit/**/*.{test,spec}.{js,jsx}",
