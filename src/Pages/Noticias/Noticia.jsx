@@ -1,12 +1,18 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Boton from "@/components/ui/Boton";
 import { noticias } from "@/data/noticias";
+import { generarSlug } from "@/utils/slug";
 
 const Noticia = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const { id } = location.state || {};
-	const noticia = noticias.find((n) => n.id === id);
+	const { slug } = useParams();
+
+	// 1. Resuelve por slug de la URL (permite abrir, recargar y compartir el enlace)
+	// 2. Si no coincide, cae al id que llega por state desde la lista
+	const noticia =
+		noticias.find((n) => generarSlug(n.title) === slug) ??
+		noticias.find((n) => n.id === location.state?.id);
 
 	if (!noticia) {
 		return (

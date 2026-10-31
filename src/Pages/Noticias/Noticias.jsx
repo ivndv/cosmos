@@ -2,14 +2,9 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Boton from "@/components/ui/Boton";
+import EncabezadoSeccion from "@/components/ui/EncabezadoSeccion";
 import { noticias } from "@/data/noticias";
-import Titulo from "../Galeria/Titulo";
-
-const generarSlug = (title) =>
-	title
-		.toLowerCase()
-		.replace(/[^a-z0-9áéíóúüñ\s]+/g, "")
-		.replace(/\s+/g, "-");
+import { generarSlug } from "@/utils/slug";
 
 const Noticias = () => {
 	const [searchTerm, setSearchTerm] = useState("");
@@ -68,15 +63,13 @@ const Noticias = () => {
 
 	return (
 		<div className="pt-[90px] px-4 pb-10 max-w-[1200px] mx-auto flex flex-col gap-10 md:pt-[100px] md:px-10 md:pb-15">
-			<div className="flex flex-col items-center text-center gap-2.5 animate-stagger-1">
-				<Titulo titulo="Últimas Noticias" />
-				<p className="text-base text-text-on-surface max-w-[680px] leading-[1.6]">
-					Las noticias más recientes sobre exploración espacial, astronomía y
-					tecnología. Mantente al día con los descubrimientos más emocionantes.
-				</p>
-			</div>
+			<EncabezadoSeccion
+				eyebrow="Actualidad"
+				titulo="Últimas Noticias"
+				descripcion="Las noticias más recientes sobre exploración espacial, astronomía y tecnología. Mantente al día con los descubrimientos más emocionantes."
+			/>
 
-			<section className="flex flex-wrap gap-4 items-center justify-center w-full animate-stagger-2">
+			<section className="flex flex-wrap gap-4 items-center justify-center w-full animate-reveal">
 				<div className="flex-[1_1_260px] max-w-[320px] relative flex items-center">
 					<Icon
 						icon="lucide:search"
@@ -202,7 +195,7 @@ const Noticias = () => {
 				)}
 			</section>
 
-			<div className="flex flex-wrap gap-1.5 animate-stagger-3">
+			<div className="flex flex-wrap gap-1.5 animate-reveal">
 				<button
 					type="button"
 					className={`border-none rounded-md px-2.5 py-1 text-xs font-inherit cursor-pointer transition-[background,color] duration-200 ${
@@ -235,11 +228,11 @@ const Noticias = () => {
 					No se encontraron noticias con esos filtros.
 				</p>
 			) : (
-				<section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 animate-stagger-4">
+				<section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 animate-reveal">
 					{filtered.map((noticia, idx) => (
 						<div
 							key={noticia.id}
-							className="border border-[#e8e8e8] rounded-lg overflow-hidden flex flex-col bg-bg-surface shadow-card transition-all duration-[250ms] hover:shadow-card-hover hover:-translate-y-1 animate-fade-in-up"
+							className="border border-[#e8e8e8] rounded-lg overflow-hidden flex flex-col bg-bg-surface shadow-card transition-shadow duration-[250ms] hover:shadow-card-hover animate-reveal"
 							style={{ animationDelay: `${idx * 0.06}s` }}
 						>
 							<img
