@@ -31,13 +31,9 @@ jobs:
       - name: Setup Bun env
         uses: ./.github/actions/setup
 
-      # 3. Ejecuta el linter de Biome
-      - name: Lint con Biome
-        run: bun run lint
-
-      # 4. Verifica que no existan discrepancias de formato
-      - name: Format check con Biome
-        run: bun run check
+      # 3. Verifica lint, formato y orden de imports sin modificar archivos
+      - name: Lint & Format Check con Biome
+        run: bunx biome ci .
 
   # ----------------------------------------------------------------------------
   # Job 2: Pruebas Unitarias (Vitest + Testing Library)
