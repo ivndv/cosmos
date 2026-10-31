@@ -13,14 +13,24 @@ export class CacheService {
 	}
 
 	/**
-	 * Determina si una petición debe almacenarse en caché
-	 * La foto del día (apod sin count) se cachea 24h; la galería con count aleatorio no se cachea.
+	 * Determina si una petición debe almacenarse en caché.
+	 * APOD sin count (la foto del día) y la galería paginada de images.
 	 * @param {string} endpoint
 	 * @param {string|null} count
 	 * @returns {boolean}
 	 */
 	shouldCache(endpoint, count = null) {
+		if (endpoint === "images") return true;
 		return endpoint === "apod" && !count;
+	}
+
+	/**
+	 * TTL específico por endpoint: 1 h para la galería, 24 h para APOD
+	 * @param {string} endpoint
+	 * @returns {number} segundos
+	 */
+	ttlFor(endpoint) {
+		return endpoint === "images" ? 3600 : this.ttlSeconds;
 	}
 
 	/**
@@ -39,13 +49,28 @@ export class CacheService {
 	}
 
 	/**
-	 * Clave normalizada a partir del endpoint y parámetros
+	 * Clave normalizada a partir del endpoint y sus parámetros
 	 * @param {string} endpoint
-	 * @param {string|null} count
+	 * @param {{ count?: string|null, page?: number|string|null, q?: string|null, center?: string|null, yearStart?: number|null, yearEnd?: number|null }} params
 	 * @returns {string}
 	 */
-	generateKey(endpoint, count = null) {
-		return count ? `${endpoint}&count=${count}` : endpoint;
+	generateKey(endpoint, params = {}) {
+		const {
+			count = null,
+			page = null,
+			q = null,
+			center = null,
+			yearStart = null,
+			yearEnd = null,
+		} = params;
+		const parts = [endpoint];
+		if (count) parts.push(`count=${count}`);
+		if (page) parts.push(`page=${page}`);
+		if (q) parts.push(`q=${encodeURIComponent(q)}`);
+		if (center) parts.push(`center=${encodeURIComponent(center)}`);
+		if (yearStart) parts.push(`from=${yearStart}`);
+		if (yearEnd) parts.push(`to=${yearEnd}`);
+		return parts.join("&");
 	}
 
 	/**
@@ -83,7 +108,7 @@ export class CacheService {
 		const cached = this.memoryStore.get(key);
 		if (!cached) return null;
 
-		const isExpired = Date.now() - cached.timestamp >= this.ttlMs;
+		const isExpired = Date.now() >= cached.expiresAt;
 		if (isExpired) {
 			this.memoryStore.delete(key);
 			return null;
@@ -99,11 +124,12 @@ export class CacheService {
 	 * @param {number} status
 	 * @param {import('hono').Context} [c]
 	 */
-	async set(key, data, status = 200, c = null) {
+	async set(key, data, status = 200, c = null, ttlSeconds = this.ttlSeconds) {
 		this.memoryStore.set(key, {
 			data,
 			status,
 			timestamp: Date.now(),
+			expiresAt: Date.now() + ttlSeconds * 1000,
 		});
 
 		const cacheApi = this.getCacheApi();
@@ -113,7 +139,7 @@ export class CacheService {
 					status,
 					headers: {
 						"Content-Type": "application/json",
-						"Cache-Control": `public, max-age=${this.ttlSeconds}, s-maxage=${this.ttlSeconds}`,
+						"Cache-Control": `public, max-age=${ttlSeconds}, s-maxage=${ttlSeconds}`,
 					},
 				});
 

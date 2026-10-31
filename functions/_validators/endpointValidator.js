@@ -6,7 +6,7 @@ export class EndpointValidator {
 	/**
 	 * @param {string[]} allowedEndpoints - Endpoints en la lista blanca
 	 */
-	constructor(allowedEndpoints = ["apod"]) {
+	constructor(allowedEndpoints = ["apod", "images"]) {
 		this.allowedEndpoints = new Set(allowedEndpoints);
 	}
 
