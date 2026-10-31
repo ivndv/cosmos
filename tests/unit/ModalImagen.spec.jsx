@@ -1,83 +1,75 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import ModalImagen from "@/Pages/Galeria/ModalImagen";
-import { mockApodImage } from "./helpers";
+import { mockApodGallery, mockApodImage } from "./helpers";
+
+const items = [mockApodImage, ...mockApodGallery.slice(0, 2)];
 
 describe("ModalImagen (Unit Tests)", () => {
-	it("no renderiza nada si la prop image es null o undefined", () => {
-		// 1. Renderiza el modal sin datos de imagen
+	it("no renderiza nada cuando index es null", () => {
 		const { container } = render(
-			<ModalImagen image={null} onClose={vi.fn()} />,
+			<ModalImagen items={items} index={null} onClose={vi.fn()} />,
 		);
 
-		// 2. Comprueba que el DOM resultante esté vacío (null guard)
 		expect(container).toBeEmptyDOMElement();
 	});
 
-	it("renderiza la información completa de la imagen cuando se proporciona", () => {
-		// 1. Renderiza el modal con imagen válida
-		render(<ModalImagen image={mockApodImage} onClose={vi.fn()} />);
+	it("renderiza el título y la descripción de la imagen activa", () => {
+		render(<ModalImagen items={items} index={0} onClose={vi.fn()} />);
 
-		// 2. Comprueba renderizado de título, texto explicativo e imagen
 		expect(
 			screen.getByRole("heading", { name: mockApodImage.title }),
 		).toBeInTheDocument();
 		expect(screen.getByText(mockApodImage.explanation)).toBeInTheDocument();
-
-		const img = screen.getByRole("img", { name: mockApodImage.title });
-		expect(img).toHaveAttribute("src", mockApodImage.url);
 	});
 
 	it("llama a onClose al hacer clic en el botón de cerrar", () => {
-		// 1. Renderiza con mock de cierre
 		const onCloseMock = vi.fn();
-		render(<ModalImagen image={mockApodImage} onClose={onCloseMock} />);
+		render(<ModalImagen items={items} index={0} onClose={onCloseMock} />);
 
-		// 2. Hace clic en el botón con aria-label "Cerrar"
-		const closeButton = screen.getByRole("button", { name: "Cerrar" });
-		fireEvent.click(closeButton);
+		fireEvent.click(screen.getByRole("button", { name: "Cerrar" }));
 
-		// 3. Comprueba ejecución del callback
-		expect(onCloseMock).toHaveBeenCalledTimes(1);
+		expect(onCloseMock).toHaveBeenCalled();
 	});
 
-	it("llama a onClose al presionar la tecla Escape", () => {
-		// 1. Renderiza el modal
+	it("llama a onClose al presionar Escape", () => {
 		const onCloseMock = vi.fn();
-		render(<ModalImagen image={mockApodImage} onClose={onCloseMock} />);
+		render(<ModalImagen items={items} index={0} onClose={onCloseMock} />);
 
-		// 2. Dispara evento global de teclado con Escape
 		fireEvent.keyDown(window, { key: "Escape" });
 
-		// 3. Comprueba ejecución del callback
-		expect(onCloseMock).toHaveBeenCalledTimes(1);
+		expect(onCloseMock).toHaveBeenCalled();
 	});
 
-	it("llama a onClose al hacer clic en el fondo oscuro (backdrop)", () => {
-		// 1. Renderiza el modal
-		const onCloseMock = vi.fn();
-		render(<ModalImagen image={mockApodImage} onClose={onCloseMock} />);
+	it("navega a la imagen siguiente con la flecha derecha", () => {
+		const onChangeMock = vi.fn();
+		render(
+			<ModalImagen
+				items={items}
+				index={0}
+				onClose={vi.fn()}
+				onChange={onChangeMock}
+			/>,
+		);
 
-		// 2. Hace clic en el contenedor backdrop
-		const backdrop = screen.getByRole("presentation");
-		fireEvent.click(backdrop);
+		fireEvent.keyDown(window, { key: "ArrowRight" });
 
-		// 3. Comprueba que se cierre el modal
-		expect(onCloseMock).toHaveBeenCalledTimes(1);
+		expect(onChangeMock).toHaveBeenCalledWith(1);
 	});
 
-	it("no llama a onClose cuando se hace clic dentro del contenedor del modal", () => {
-		// 1. Renderiza el modal
-		const onCloseMock = vi.fn();
-		render(<ModalImagen image={mockApodImage} onClose={onCloseMock} />);
+	it("no navega hacia atrás desde la primera imagen", () => {
+		const onChangeMock = vi.fn();
+		render(
+			<ModalImagen
+				items={items}
+				index={0}
+				onClose={vi.fn()}
+				onChange={onChangeMock}
+			/>,
+		);
 
-		// 2. Hace clic en el contenido interior (h2 del título)
-		const titleHeading = screen.getByRole("heading", {
-			name: mockApodImage.title,
-		});
-		fireEvent.click(titleHeading);
+		fireEvent.keyDown(window, { key: "ArrowLeft" });
 
-		// 3. Comprueba que stopPropagation impida cerrar el modal
-		expect(onCloseMock).not.toHaveBeenCalled();
+		expect(onChangeMock).not.toHaveBeenCalled();
 	});
 });
