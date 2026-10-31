@@ -10,15 +10,15 @@ const links = [
 
 function Navbar() {
 	return (
-		<nav className="flex gap-4 z-1">
+		<nav className="flex gap-6 z-1">
 			{links.map(({ to, icon, label }) => (
 				<Link
 					key={to}
 					to={to}
 					aria-label={label}
-					className="no-underline text-text-primary text-sm flex items-center gap-1.5 opacity-85 transition-colors duration-200 hover:text-accent hover:opacity-100"
+					className="no-underline text-text-primary text-[13px] flex items-center gap-1.5 opacity-85 transition-colors duration-200 hover:text-accent hover:opacity-100"
 				>
-					<Icon icon={icon} width="16" />
+					<Icon icon={icon} width="15" />
 					{label}
 				</Link>
 			))}

@@ -1,5 +1,5 @@
+import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
-import { BsRocket } from "react-icons/bs";
 import { FaBars } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -36,20 +36,20 @@ function Header() {
 
 	return (
 		<header
-			className="w-full flex flex-row-reverse justify-between items-center px-4 fixed top-0 z-[1000] shadow-sm transition-all duration-300 md:flex-row md:justify-center md:px-5"
+			className="w-full flex flex-row-reverse justify-between items-center px-4 fixed top-0 z-[1000] shadow-sm transition-[height,background-color] duration-300 md:flex-row md:justify-center md:px-5"
 			style={{
 				height: isMobile
 					? shrink
-						? "40px"
-						: "50px"
+						? "38px"
+						: "46px"
 					: shrink
-						? "55px"
-						: "70px",
+						? "48px"
+						: "60px",
 				backgroundColor:
 					shrink || !isHome
 						? "var(--color-bg-primary)"
-						: "rgba(13, 13, 26, 0.65)",
-				backdropFilter: shrink || !isHome ? "none" : "blur(12px)",
+						: "rgba(13, 13, 26, 0.18)",
+				backdropFilter: shrink || !isHome ? "none" : "blur(14px)",
 			}}
 		>
 			<div className="w-full max-w-[1200px] flex justify-between items-center flex-row-reverse md:flex-row">
@@ -59,15 +59,18 @@ function Header() {
 					aria-label="Cosmos Inicio"
 				>
 					<div className="flex items-center">
-						<BsRocket
-							className="text-accent transition-all duration-300"
+						<Icon
+							icon="lucide:rocket"
+							className={`transition-[width,height,color] duration-300 ${
+								shrink || !isHome ? "text-accent" : "text-white"
+							}`}
 							style={{
-								width: shrink ? "28px" : "32px",
-								height: shrink ? "28px" : "32px",
+								width: shrink ? "24px" : "28px",
+								height: shrink ? "24px" : "28px",
 							}}
 						/>
 					</div>
-					<span className="text-[5vw] m-0 text-text-primary md:text-[20px] font-bold">
+					<span className="text-[17px] m-0 text-text-primary font-bold">
 						Cosmos
 					</span>
 				</Link>

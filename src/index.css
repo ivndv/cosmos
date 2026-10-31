@@ -1,3 +1,4 @@
+/* biome-ignore-all lint/complexity/noImportantStyles: el bloque de movimiento reducido necesita !important para sobreescribir animaciones */
 @import "tailwindcss";
 
 @theme {
@@ -37,15 +38,7 @@
 	--animate-fade-in: fadeIn 0.2s ease;
 	--animate-fade-in-slow: fadeIn 0.4s ease;
 	--animate-slide-up: slideUp 0.25s ease;
-	--animate-stagger-1: fadeInUp 0.3s ease forwards;
-	--animate-stagger-2: fadeInUp 0.3s ease 0.08s forwards;
-	--animate-stagger-3: fadeInUp 0.3s ease 0.16s forwards;
-	--animate-stagger-4: fadeInUp 0.3s ease 0.24s forwards;
-	--animate-fade-in-up: fadeInUp 0.4s ease forwards;
-	--animate-hero-1: fadeInUp 0.5s ease 0.1s forwards;
-	--animate-hero-2: fadeInUp 0.5s ease 0.25s forwards;
-	--animate-hero-3: fadeInUp 0.5s ease 0.4s forwards;
-	--animate-hero-4: fadeInUp 0.5s ease 0.55s forwards;
+	--animate-reveal: fadeInUp 220ms ease-out forwards;
 }
 
 /* Estilos base del documento */
@@ -67,6 +60,11 @@ h4 {
 
 body {
 	min-height: 100vh;
+}
+
+/* Tipografía secundaria para textos sobre imagen */
+.font-grotesk {
+	font-family: "Space Grotesk", "Outfit", sans-serif;
 }
 
 button {
@@ -91,7 +89,7 @@ img {
 @keyframes fadeInUp {
 	from {
 		opacity: 0;
-		transform: translateY(20px);
+		transform: translateY(6px);
 	}
 	to {
 		opacity: 1;
@@ -118,5 +116,17 @@ img {
 	}
 	100% {
 		background-position: -200% 0;
+	}
+}
+
+/* Respeta la preferencia de movimiento reducido del sistema */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
 	}
 }

@@ -2,7 +2,7 @@
 function Boton({ className, ...props }) {
 	return (
 		<button
-			className={`inline-flex items-center justify-center font-semibold cursor-pointer no-underline rounded-md transition-all duration-300 ${className || ""}`}
+			className={`inline-flex items-center justify-center font-semibold cursor-pointer no-underline rounded-md transition-colors duration-200 ${className || ""}`}
 			{...props}
 		/>
 	);
