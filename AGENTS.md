@@ -37,9 +37,9 @@ functions/
 
 ## Endpoints
 
-| Ruta | Qué hace |
-|---|---|
-| `GET /api/nasa?endpoint=apod` | Imagen del día |
+| Ruta                                         | Qué hace         |
+| -------------------------------------------- | ---------------- |
+| `GET /api/nasa?endpoint=apod`                | Imagen del día   |
 | `GET /api/nasa?endpoint=images&page=1&q=...` | Galería paginada |
 
 Si el APOD del día falla, el BFF responde **503** y el frontend usa `agujero-negro.png` como respaldo.
