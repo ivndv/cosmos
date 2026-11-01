@@ -30,10 +30,9 @@ export class NasaClient {
 	 * @returns {Promise<{ data: any, status: number }>}
 	 */
 	async fetchEndpoint(endpoint, count, apiKey) {
-		const query = count
-			? `?count=${count}&api_key=${apiKey}`
-			: `?api_key=${apiKey}`;
-		const url = `${this.baseUrl}/${endpoint}${query}`;
+		const params = new URLSearchParams({ api_key: apiKey });
+		if (count) params.set("count", count);
+		const url = `${this.baseUrl}/${endpoint}?${params.toString()}`;
 
 		const controller = new AbortController();
 		const timeout = setTimeout(() => controller.abort(), this.timeoutMs);

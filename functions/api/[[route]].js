@@ -3,8 +3,15 @@ import { Hono } from "hono";
 // Adaptador para Cloudflare Pages Functions
 import { handle } from "hono/cloudflare-pages";
 
-// Servicios y Validadores
-import { CacheService } from "../_services/cacheService";
+// Caché
+import { CacheService } from "../_cache";
+import { cachePlan } from "../_cache/keys";
+// Middlewares
+import { cache as cacheMiddleware } from "../_middleware/cache";
+import { rateLimit as rateLimitMiddleware } from "../_middleware/rateLimit";
+// Límite de peticiones
+import { MemoryRateLimiter } from "../_ratelimit/memoryStore";
+// Servicios y validadores
 import {
 	CENTROS,
 	ImagesClient,
@@ -12,43 +19,37 @@ import {
 	YEAR_MIN,
 } from "../_services/imagesClient";
 import { NasaClient } from "../_services/nasaClient";
-import { RateLimiter } from "../_services/rateLimiter";
 import { EndpointValidator } from "../_validators/endpointValidator";
 
 // Instancias compartidas del worker
-const rateLimiter = new RateLimiter();
 const cacheService = new CacheService();
+const rateLimiter = new MemoryRateLimiter();
 const nasaClient = new NasaClient();
 const imagesClient = new ImagesClient();
 const endpointValidator = new EndpointValidator();
 
 const app = new Hono();
 
+// Capas transversales: límite por IP y caché de borde
+app.use("/api/nasa", rateLimitMiddleware(rateLimiter));
+app.use("/api/nasa", cacheMiddleware({ cache: cacheService, plan: cachePlan }));
+
 /**
  * GET /api/nasa - Proxy hacia la API Planetary de NASA
  */
 app.get("/api/nasa", async (c) => {
-	// 1. Límite de peticiones por IP (30 req / min)
-	const ip = rateLimiter.getClientIP(c);
-	if (!rateLimiter.isAllowed(ip)) {
-		return c.json(
-			{ error: "Demasiadas solicitudes. Intenta de nuevo más tarde." },
-			429,
-		);
-	}
-
-	// 2. Parámetros y credenciales del entorno
+	// 1. Parámetros y credenciales del entorno
 	const endpoint = c.req.query("endpoint") || "apod";
 	const count = c.req.query("count") || null;
 	const apiKey = c.env.NASA_API_KEY;
 
-	// 3. Validación de endpoint permitido
+	// 2. Validación de endpoint permitido
 	const validation = endpointValidator.validate(endpoint);
 	if (!validation.isValid) {
 		return c.json({ error: validation.error }, 400);
 	}
 
-	// 3b. Galería: librería de imágenes de NASA (sin API key, paginada)
+	// 3. Galería: librería de imágenes de NASA (sin API key, paginada)
 	if (endpoint === "images") {
 		const requestedPage = Number.parseInt(c.req.query("page") ?? "1", 10);
 		const page =
@@ -70,19 +71,6 @@ app.get("/api/nasa", async (c) => {
 			[yearStart, yearEnd] = [yearEnd, yearStart];
 		}
 
-		// Caché de borde: 1 h por combinación de filtros y página
-		const imagesKey = cacheService.generateKey("images", {
-			page,
-			q,
-			center,
-			yearStart,
-			yearEnd,
-		});
-		const cachedImages = await cacheService.get(imagesKey);
-		if (cachedImages) {
-			return c.json(cachedImages.data, cachedImages.status);
-		}
-
 		try {
 			const result = await imagesClient.search({
 				q,
@@ -91,52 +79,34 @@ app.get("/api/nasa", async (c) => {
 				yearStart,
 				yearEnd,
 			});
-			await cacheService.set(
-				imagesKey,
-				result,
-				200,
-				c,
-				cacheService.ttlFor("images"),
-			);
 			return c.json(result);
 		} catch (err) {
 			return c.json({ error: err.message }, err.status || 502);
 		}
 	}
 
-	// 4. Consulta en caché (solo para la foto del día; la galería con count se consulta en vivo)
-	const isCacheable = cacheService.shouldCache(endpoint, count);
-	const cacheKey = cacheService.generateKey(endpoint, { count });
-
-	if (isCacheable) {
-		const cached = await cacheService.get(cacheKey);
-		if (cached) {
-			return c.json(cached.data, cached.status);
-		}
-	}
-
-	// 5. Petición a NASA
+	// 4. Petición a NASA
 	try {
 		const { data, status } = await nasaClient.fetchEndpoint(
 			endpoint,
 			count,
 			apiKey,
 		);
+		const esApodDelDia = endpoint === "apod" && !count;
 
-		// 6. Guarda en caché si corresponde (24h para foto del día) y responde
-		if (isCacheable) {
-			await cacheService.set(
-				cacheKey,
-				data,
-				status,
-				c,
-				cacheService.ttlFor(endpoint),
+		// 4b. Sin foto del día no se inventa otra: el frontend usa su respaldo
+		if (esApodDelDia && status >= 500) {
+			return c.json(
+				{
+					error: "La imagen del día no está disponible en este momento.",
+				},
+				503,
 			);
 		}
 
 		return c.json(data, status);
 	} catch (err) {
-		return c.json({ error: err.message }, err.status || 500);
+		return c.json({ error: err.message }, err.status || 502);
 	}
 });
 
