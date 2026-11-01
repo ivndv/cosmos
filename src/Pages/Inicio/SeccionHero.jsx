@@ -90,9 +90,7 @@ function SeccionHero() {
 						</div>
 					</>
 				) : dailyError ? (
-					<p className="text-[3vw] md:text-[15px] text-red-400">
-						No se pudo cargar la imagen del día
-					</p>
+					<p className="text-[3vw] md:text-[15px]">Imagen de archivo</p>
 				) : (
 					<p className="text-[3vw] md:text-[15px]">
 						Cargando imagen del día...

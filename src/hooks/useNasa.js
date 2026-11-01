@@ -35,6 +35,8 @@ export function useDailyImage() {
 			}
 			return fetchNasa("endpoint=apod");
 		},
+		// Un solo reintento: si NASA falla, el hero usa su imagen de respaldo
+		retry: 1,
 	});
 }
 
