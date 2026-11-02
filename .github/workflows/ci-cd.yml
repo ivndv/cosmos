@@ -15,6 +15,15 @@ on:
       - main
       - develop
 
+# Cancela ejecuciones previas del mismo ref, excepto deploys en main
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+# Permisos mínimos: solo lectura del repositorio
+permissions:
+  contents: read
+
 jobs:
   # ----------------------------------------------------------------------------
   # Job 1: Lint y Verificación de Formato (Biome)
@@ -22,10 +31,11 @@ jobs:
   lint:
     name: Lint & Format Check
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       # 1. Clona el repositorio
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # 2. Configura Node, Bun y dependencias con caché
       - name: Setup Bun env
@@ -41,10 +51,11 @@ jobs:
   unit:
     name: Tests Unitarios (Vitest)
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       # 1. Clona el repositorio
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # 2. Configura Node, Bun y dependencias con caché
       - name: Setup Bun env
@@ -63,10 +74,11 @@ jobs:
     if: false
     needs: [lint, unit] # Se ejecuta solo si lint y unit pasaron con éxito
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       # 1. Clona el repositorio
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # 2. Configura Bun, dependencias y binarios de Playwright Chromium
       - name: Setup E2E
@@ -104,10 +116,11 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: [lint, unit] # Requiere lint y tests; E2E está desactivado temporalmente
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       # 1. Clona el código
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # 2. Configura el entorno Bun
       - name: Setup Bun env
