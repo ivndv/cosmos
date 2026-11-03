@@ -29,7 +29,7 @@ jobs:
   # Job 1: Lint y Verificación de Formato (Biome)
   # ----------------------------------------------------------------------------
   lint:
-    name: Lint & Format Check
+    name: Biome
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -145,8 +145,7 @@ jobs:
 
       # 5. Publica en Cloudflare Pages usando Wrangler Action
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/ --project-name=cosmos
+        run: bunx wrangler pages deploy dist/ --project-name=cosmos --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
