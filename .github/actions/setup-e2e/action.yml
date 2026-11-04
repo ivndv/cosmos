@@ -19,4 +19,4 @@ runs:
     # 3. Instala Chromium y dependencias del sistema operativo si no estaban en caché
     - name: Install Playwright chromium
       shell: bash
-      run: bunx playwright install --with-deps chromium
+      run: bunx playwright install chromium
