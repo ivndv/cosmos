@@ -30,7 +30,7 @@ jobs:
   # ----------------------------------------------------------------------------
   lint:
     name: Biome
-    runs-on: [self-hosted, Linux, ARM64]
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       # 1. Clona el repositorio
@@ -50,7 +50,7 @@ jobs:
   # ----------------------------------------------------------------------------
   unit:
     name: Tests Unitarios (Vitest)
-    runs-on: [self-hosted, Linux, ARM64]
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       # 1. Clona el repositorio
@@ -73,7 +73,7 @@ jobs:
     # Deshabilitado: las specs están obsoletas tras el rediseño de la galería y del sistema solar
     if: false
     needs: [lint, unit] # Se ejecuta solo si lint y unit pasaron con éxito
-    runs-on: [self-hosted, Linux, ARM64]
+    runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       # 1. Clona el repositorio
@@ -115,7 +115,7 @@ jobs:
     name: Despliegue en Cloudflare Pages
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: [lint, unit] # Requiere lint y tests; E2E está desactivado temporalmente
-    runs-on: [self-hosted, Linux, ARM64]
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       # 1. Clona el código
