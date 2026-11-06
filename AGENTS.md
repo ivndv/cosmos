@@ -17,16 +17,16 @@ Explora el universo con imágenes astronómicas, noticias y sistema solar.
 
 ## 3. Stack tecnológico
 
-| Capa | Tecnología |
-| :--- | :--- |
-| **Frontend** | React 19 + Vite 8 |
-| **Estilos** | Tailwind CSS 4 |
-| **Datos en cliente** | TanStack Query |
-| **BFF** | Hono en Cloudflare Pages Functions |
-| **Hosting** | Cloudflare Pages |
-| **Runtime & gestor** | Bun |
-| **Linter/Formatter** | Biome |
-| **Testing** | Vitest + Playwright |
+| Capa                 | Tecnología                         |
+| :------------------- | :--------------------------------- |
+| **Frontend**         | React 19 + Vite 8                  |
+| **Estilos**          | Tailwind CSS 4                     |
+| **Datos en cliente** | TanStack Query                     |
+| **BFF**              | Hono en Cloudflare Pages Functions |
+| **Hosting**          | Cloudflare Pages                   |
+| **Runtime & gestor** | Bun                                |
+| **Linter/Formatter** | Biome                              |
+| **Testing**          | Vitest + Playwright                |
 
 ## 4. Estructura del código
 
@@ -61,9 +61,9 @@ functions/
 
 ### 5.3 Endpoints
 
-| Ruta | Qué hace |
-| :--- | :--- |
-| `GET /api/nasa?endpoint=apod` | Imagen del día |
+| Ruta                                         | Qué hace         |
+| :------------------------------------------- | :--------------- |
+| `GET /api/nasa?endpoint=apod`                | Imagen del día   |
 | `GET /api/nasa?endpoint=images&page=1&q=...` | Galería paginada |
 
 Si el APOD del día falla, el BFF responde **503** y el frontend usa `agujero-negro.png` como respaldo.
@@ -140,5 +140,5 @@ bun run test:e2e
 
 - **PROHIBIDO hacer commits o push sin la aprobación explícita del usuario.**
 - **Flujo de ramas:** desarrollo en `develop`; merge a `main` solo tras aprobación.
-- **Mensajes de commit:** *Conventional Commits* en minúsculas y español (`feat: ...`, `fix: ...`, `chore: ...`).
+- **Mensajes de commit:** _Conventional Commits_ en minúsculas y español (`feat: ...`, `fix: ...`, `chore: ...`).
 - **Despliegue:** Cloudflare Pages sirve `dist/` y las Pages Functions; la configuración vive en `wrangler.jsonc`.
