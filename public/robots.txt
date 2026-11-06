@@ -4,4 +4,4 @@ Allow: /
 Disallow: /api/
 
 # Mapa del sitio
-Sitemap: https://cosmos.mgdc.site/sitemap.xml
+Sitemap: https://cosmos.liuma.app/sitemap.xml

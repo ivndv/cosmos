@@ -21,7 +21,7 @@ Aplicación web moderna e interactiva diseñada para explorar y descubrir los mi
 
 ## Uso
 
-- **Visualizar Contenido**: La aplicación ya está activa y puedes explorarla en vivo aquí: [Cosmos](https://cosmos.mgdc.site/).
+- **Visualizar Contenido**: La aplicación ya está activa y puedes explorarla en vivo aquí: [Cosmos](https://cosmos.liuma.app/).
 - **Explorar la Galería**: Haz clic en cualquier fotografía para abrir el modal explicativo o usa el buscador para encontrar imágenes por texto.
 - **Conocer el Sistema Solar**: Selecciona los diferentes planetas y cuerpos para ver sus características, distancias y datos astronómicos.
 
@@ -39,7 +39,7 @@ Aplicación web moderna e interactiva diseñada para explorar y descubrir los mi
 
 ## Despliegue
 
-La aplicación está construida para ser sumamente ligera y se encuentra desplegada de forma global a través de Cloudflare Pages. Puedes usarla directamente aquí: [Cosmos](https://cosmos.mgdc.site/)
+La aplicación está construida para ser sumamente ligera y se encuentra desplegada de forma global a través de Cloudflare Pages. Puedes usarla directamente aquí: [Cosmos](https://cosmos.liuma.app/)
 
 ## Licencia
 
